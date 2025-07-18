@@ -1,0 +1,60 @@
+<view class="container">
+
+<!-- 顶部左右布局 -->
+<view class="top-row">
+  <view class="top-left">
+    <image src="/images/home/top.png" mode="widthFix" class="logo" />
+    <view class="map-container">
+        <image src="/images/home/map.png" class="map" />
+        <text class="hall-name">南通市崇川区桃园路7号南通体育会展中心L2009-1</text>
+    </view>
+  </view>
+  <view class="top-right" bindtap="callPhone">
+    <image src="/images/home/call.png" class="phone-icon" />
+    <text class="phone-text">电话</text>
+  </view>
+</view>
+
+<!-- Banner 区域 -->
+<swiper
+  class="banner"
+  autoplay
+  indicator-dots
+  indicator-active-color="#FF6A00"
+  circular>
+  <swiper-item wx:for="{{bannerList}}" wx:key="index">
+    <image class="banner-img" src="{{item}}" />
+  </swiper-item>
+</swiper>
+
+<!-- 功能菜单区 -->
+<view class="menu-wrapper">
+  <view class="menu-row">
+    <view class="menu-item" wx:for="{{menuList}}"  wx:key="text" data-index="{{index}}" bind:tap="menuClick">
+      <image class="menu-icon" src="{{item.icon}}" />
+      <text class="menu-text">{{item.text}}</text>
+    </view>
+  </view>
+</view>
+
+
+<!-- 订场 -->
+<view class="section-title">订场</view>
+<scroll-view scroll-x class="scroll-x-wrapper">
+  <view class="scroll-content">
+    <view class="booking-card" wx:for="{{bookingList}}" wx:key="index">
+    <view class="booking-date">{{item.date}}</view>
+    <view class="booking-time">{{item.time}}</view>
+    <view class="booking-price">{{item.price}}</view>
+  </view>
+  </view>
+</scroll-view>
+
+<!-- 比赛推荐 -->
+<view class="section-title">比赛</view>
+<scroll-view scroll-x class="match-scroll" enable-flex>
+  <view class="match-card" wx:for="{{matchList}}" wx:key="index" bindtap="onMatchClick">
+    <image class="match-img" src="{{item}}" />
+  </view>
+</scroll-view>
+</view>

@@ -1,0 +1,50 @@
+<view class="container">
+
+<!-- 1. 顶部日期选择 -->
+<scroll-view scroll-x class="date-scroll" enable-flex>
+  <view class="date-item" wx:for="{{dateList}}" wx:key="index" bindtap="onDateSelect" data-index="{{index}}" style="{{selectedDateIndex === index ? 'color: #FF5A00' : ''}}">
+    <view class="date-week">{{item.week}}</view>
+    <view class="date-day" style="{{selectedDateIndex === index ? 'background:#FF5A00;color:#fff;' : ''}}">{{item.day}}</view>
+  </view>
+</scroll-view>
+
+<!-- 2. 中间主内容区 -->
+<view class="main-body">
+
+  <!-- 左侧场地菜单 -->
+  <view class="venue-menu">
+  <view
+    class="venue-item"
+    wx:for="{{venueList}}"
+    wx:key="index"
+    bindtap="onVenueSelect"
+    data-index="{{index}}"
+    style="{{index === 0 ? 'background: #fff;' : (selectedVenueIndex === index ? 'background: #FFF2E5; color: #FF5A00;' : '')}}"
+  >
+    <text>{{item}}</text>
+    <!-- 训练场才显示小三角 ▼ -->
+    <text class="triangle" wx:if="{{index === 0}}">▼</text>
+  </view>
+</view>
+
+
+  <!-- 右侧时间段列表 -->
+  <scroll-view scroll-y class="time-slot-scroll">
+    <view class="time-slot" wx:for="{{timeList}}" wx:key="index" style="{{item.selected ? 'background: #FF5A00; color: white;' : ''}}" bindtap="toggleSlot" data-index="{{index}}">
+      <view class="time-range">{{item.time}}</view>
+      <view class="price">￥{{item.price}}</view>
+    </view>
+  </scroll-view>
+
+</view>
+
+<!-- 3. 底部悬浮区域 -->
+<view class="bottom-bar">
+  <view class="notice" bindtap="onNoticeTap">
+    <text>ℹ️ 预订须知</text>
+  </view>
+  <view class="book-btn" bindtap="onBookNow">
+    ￥{{totalPrice}} 立即预定
+  </view>
+</view>
+</view>

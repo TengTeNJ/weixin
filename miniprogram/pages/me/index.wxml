@@ -1,0 +1,52 @@
+<view class="container">
+   <!--顶部图片-->
+    <view class="top-image">
+    <image src="/images/mine/top.png" class="top-image-class" mode="heightFix"></image>
+    </view>
+    <!-- 用户信息区域 -->
+    <!-- <view class="user-info">
+        <image class="avatar" src="https://example.com/avatar.jpg"></image>
+        <view class="user-text">
+            <view class="nickname">Tommy</view>
+            <view class="phone">📱 1885156878</view>
+        </view>
+        <view class="balance">余额 ￥100.00</view>
+    </view> -->
+
+<!-- 头像 + 用户信息 -->
+<view class="user-info" bindtap="onUserTap">
+  <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}"></image>
+  <view class="user-text">
+    <view class="nickname">{{userInfo.nickName || '点击登录'}}</view>
+    <view class="phone">
+      {{userInfo.phoneNumber ? '📱 ' + userInfo.phoneNumber : '未绑定手机号'}}
+    </view>
+  </view>
+  <view class="balance">余额 ￥{{userInfo.balance || '0.00'}}</view>
+</view>
+
+<!-- 获取手机号隐藏按钮（必须用户点击触发）-->
+<button open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">获取手机号</button>
+    <!-- 功能入口 -->
+    <view class="grid-container">
+        <block wx:for="{{featureList}}" wx:key="index">
+            <view class="grid-item">
+                <image class="grid-icon" src="{{item.icon}}" mode="heightFix"></image>
+                <text class="grid-text">{{item.text}}</text>
+            </view>
+        </block>
+    </view>
+
+    <!-- 下方列表入口 -->
+    <view class="list-container">
+        <block wx:for="{{listItems}}" wx:key="index">
+            <view class="list-item">
+                <view class="left">
+                    <image class="list-icon" src="{{item.icon}}"></image>
+                    <text class="list-title">{{item.title}}</text>
+                </view>
+                <image class="arrow" src="/images/mine/arrow-right.png" mode="heightFix"></image>
+            </view>
+        </block>
+    </view>
+</view>

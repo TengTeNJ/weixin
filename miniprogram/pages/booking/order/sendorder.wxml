@@ -1,0 +1,44 @@
+<view class="container">
+  <!-- 场地图片 -->
+  <image class="venue-image" src="{{venueImage}}" mode="aspectFill" />
+
+  <!-- 场地名称和地址 -->
+  <view class="venue-name">{{venueName}}</view>
+  <view class="venue-address">{{venueAddress}}</view>
+
+  <!-- 选中的时间段列表 -->
+  <view class="selected-time-list">
+    <view class="time-item" wx:for="{{selectedTimes}}" wx:key="index">
+      <text>{{item.date}}</text>
+      <text>{{item.court}}</text>
+      <text>{{item.time}}</text>
+    </view>
+  </view>
+
+  <!-- 规则与小计 -->
+  <view class="rule-price-row">
+    <text class="rule-text">退改规则</text>
+    <text class="price-text">小计金额 ¥{{subtotal}}</text>
+  </view>
+
+  <!-- 用户手机号 -->
+  <view class="user-info">
+    <text>手机号</text>
+    <view class="phone-box">
+      <text class="user-phone">{{phoneNumber}}</text>
+      <text class="edit-btn" bindtap="onEditPhone">修改</text>
+    </view>
+  </view>
+
+  <!-- 预订须知 -->
+  <view class="booking-notice">
+    <text class="notice-title">– 预订须知 –</text>
+    <text class="notice-text">{{noticeText}}</text>
+  </view>
+</view>
+
+<!-- 底部支付栏 -->
+<view class="bottom-bar">
+  <text class="total-amount">总计金额：¥{{subtotal}}</text>
+  <view class="pay-btn" bindtap="onPay">立即支付</view>
+</view>

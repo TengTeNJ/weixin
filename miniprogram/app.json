@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/scan/index",
+    "pages/me/index",
+    "pages/booking/home/index",
+    "pages/booking/order/sendorder",
+    "pages/booking/success/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "Potent",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#888",
+    "selectedColor": "#ff5500",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/bottom/home.png",
+        "selectedIconPath": "images/bottom/home.png"
+      },
+      {
+        "pagePath": "pages/scan/index",
+        "text": "",
+        "iconPath": "images/bottom/scan.png",
+        "selectedIconPath": "images/bottom/scan.png"
+      },
+      {
+        "pagePath": "pages/me/index",
+        "text": "我的",
+        "iconPath": "images/bottom/mine.png",
+        "selectedIconPath": "images/bottom/mine.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userInfo": {
+      "desc": "用于显示用户头像与昵称"
+    }
+  }
+}

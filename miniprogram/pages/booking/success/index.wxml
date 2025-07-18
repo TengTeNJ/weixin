@@ -1,0 +1,13 @@
+<!--pages/booking/success/index.wxml-->
+<view class="container">
+<!--支付成功-->
+<view class="success">
+<image src="/images/home/done.png" class="success-image" mode="heightFix"></image>
+<view class="success-text">支付成功</view>
+</view>
+<!--返回首页 查看订单-->
+<view class="two-button">
+<view class="back-home" bind:tap="backToHome">返回首页</view>
+<view class="check-order" bind:tap="checkOrder">查看订单</view>
+</view>
+</view>

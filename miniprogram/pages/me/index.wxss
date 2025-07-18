@@ -1,0 +1,106 @@
+.container {
+    background: #fff;
+    align-items: center;
+}
+
+.top-image-class{
+    height: 120rpx;
+}
+
+/* 用户信息区域 */
+.user-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32rpx 0;
+    border-bottom: 1rpx solid #eee;
+    box-sizing: border-box;
+}
+
+.avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.user-text {
+    flex: 1;
+}
+
+.nickname {
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.phone {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.balance {
+    color: #f60;
+    font-size: 28rpx;
+}
+
+/* 功能入口区域 */
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 78rpx 0;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    color: #f60;
+    text-align: center;
+    margin-bottom: 30rpx;
+}
+
+.grid-icon {
+    height: 60rpx;
+    margin-bottom: 26rpx;
+}
+
+.grid-text {
+    font-size: 24rpx;
+    color: #333;
+}
+
+/* 列表区域 */
+.list-container {
+    padding: 0 32rpx;
+    width: calc(100% - 64rpx);
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30rpx 0;
+    border-bottom: 1rpx solid #f2f2f2;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+
+.list-icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 20rpx;
+}
+
+.list-title {
+    font-size: 28rpx;
+}
+
+.arrow {
+    height: 24rpx;
+}
