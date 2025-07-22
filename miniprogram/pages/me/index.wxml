@@ -14,19 +14,31 @@
     </view> -->
 
 <!-- 头像 + 用户信息 -->
-<view class="user-info" bindtap="onUserTap">
-  <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}"></image>
+<view class="user-info">
+<!--头像-->
+<button 
+  open-type="chooseAvatar" 
+  bindchooseavatar="onChooseAvatar"
+  class="circle-avatar-button"
+>
+  <image wx:if="{{userInfo.avatarUrl}}" src="{{userInfo.avatarUrl}}" class="avatar-image"></image>
+  <text wx:else class="header-text">设置头像</text>
+</button>
+
+  <!-- <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}"></image> -->
   <view class="user-text">
     <view class="nickname">{{userInfo.nickName || '点击登录'}}</view>
-    <view class="phone">
-      {{userInfo.phoneNumber ? '📱 ' + userInfo.phoneNumber : '未绑定手机号'}}
+   <!--手机号-->
+    <view wx:if="{{userInfo.phoneNumber}}" wx:class="phone">
+      {{userInfo.phoneNumber ?  userInfo.phoneNumber : '未绑定手机号'}}
     </view>
+    <button wx:else open-type="getPhoneNumber" size="mini" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">获取手机号</button>
+
   </view>
   <view class="balance">余额 ￥{{userInfo.balance || '0.00'}}</view>
 </view>
 
 <!-- 获取手机号隐藏按钮（必须用户点击触发）-->
-<button open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">获取手机号</button>
     <!-- 功能入口 -->
     <view class="grid-container">
         <block wx:for="{{featureList}}" wx:key="index">

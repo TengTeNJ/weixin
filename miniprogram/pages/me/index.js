@@ -1,0 +1,152 @@
+Page({
+    data: {
+        userInfo: {
+            avatarUrl: '',
+            nickName: '',
+            phoneNumber: '',
+            balance: 100.00,
+        },
+        featureList: [{
+                icon: '/images/mine/order.png',
+                text: '我的订单'
+            },
+            {
+                icon: '/images/mine/recharge.png',
+                text: '会员充值'
+            },
+            {
+                icon: '/images/mine/tennis.png',
+                text: '网球赛事'
+            },
+            {
+                icon: '/images/mine/study.png',
+                text: '研学活动'
+            },
+            {
+                icon: '/images/mine/data.png',
+                text: '训练数据'
+            },
+            {
+                icon: '/images/mine/record.png',
+                text: '个人记录'
+            },
+            {
+                icon: '/images/mine/rank.png',
+                text: '排行榜'
+            },
+            {
+                icon: '/images/mine/match.png',
+                text: '我的比赛'
+            },
+        ],
+        listItems: [{
+                icon: '/images/mine/records.png',
+                title: '消费记录'
+            },
+            {
+                icon: '/images/mine/coupon.png',
+                title: '优惠券'
+            },
+            {
+                icon: '/images/mine/message.png',
+                title: '留言咨询'
+            },
+            {
+                icon: '/images/mine/notice.png',
+                title: '场馆须知'
+            },
+            {
+                icon: '/images/mine/help.png',
+                title: '帮助中心'
+            },
+        ]
+    },
+    onUserTap() {
+        const _this = this;
+        if (!this.data.userInfo.nickName) {
+            wx.getUserProfile({
+                desc: '获取您的头像与昵称',
+                success(res) {
+                    console.error('123',res);
+                    const {
+                        avatarUrl,
+                        nickName
+                    } = res.userInfo;
+                    _this.setData({
+                        'userInfo.avatarUrl': avatarUrl,
+                        'userInfo.nickName': nickName
+                    });
+                    wx.showToast({
+                        title: '头像获取成功'
+                    });
+                },
+                fail() {
+                    wx.showToast({
+                        title: '授权失败',
+                        icon: 'none'
+                    });
+                }
+            });
+        } else if (!this.data.userInfo.phoneNumber) {
+            // 用户已登录但未绑定手机号
+            const query = wx.createSelectorQuery();
+            query.select('.hidden-btn').boundingClientRect();
+            query.exec(() => {
+                wx.nextTick(() => {
+                    wx.createSelectorQuery().select('.hidden-btn').node().exec(res => {
+                        res[0].node.click?.(); // 触发按钮
+                    });
+                });
+            });
+        }
+    },
+
+    onChooseAvatar(e) {
+        const { avatarUrl } = e.detail // 头像临时路径
+        this.setData({  'userInfo.avatarUrl' : avatarUrl })
+        console.error('345',e.detail);
+
+        // 上传头像到服务器（可选）
+       // wx.uploadFile({ url: 'your_api', filePath: avatarUrl, name: 'avatar' })
+      },
+
+    onGetPhoneNumber(e) {
+        const {
+            code
+        } = e.detail;
+        console.error('111',e.detail)
+        if (!code) {
+            wx.showToast({
+                title: '用户取消授权',
+                icon: 'none'
+            });
+            return;
+        }
+
+        wx.cloud.callFunction({
+            name: 'getPhoneNumber',
+            data: {
+                code
+            },
+            success: res => {
+                console.error('success',res)
+                const phone = res.result.phoneNumber;
+                this.setData({
+                    'userInfo.phoneNumber': phone
+                });
+                wx.showToast({
+                    title: '手机号绑定成功'
+                });
+            },
+            fail: err => {
+                console.error('手机号获取失败', err);
+                wx.showToast({
+                    title: '获取手机号失败',
+                    icon: 'none'
+                });
+            }
+        });
+    }
+
+
+})
