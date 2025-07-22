@@ -5,7 +5,8 @@
     "pages/me/index",
     "pages/booking/home/index",
     "pages/booking/order/sendorder",
-    "pages/booking/success/index"
+    "pages/booking/success/index",
+    "pages/booking/order/order"
   ],
   "window": {
     "navigationBarTitleText": "Potent",

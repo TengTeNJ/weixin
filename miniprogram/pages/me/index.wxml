@@ -42,7 +42,7 @@
     <!-- 功能入口 -->
     <view class="grid-container">
         <block wx:for="{{featureList}}" wx:key="index">
-            <view class="grid-item">
+            <view class="grid-item" data-index="{{index}}" bind:tap="onClickGrid">
                 <image class="grid-icon" src="{{item.icon}}" mode="heightFix"></image>
                 <text class="grid-text">{{item.text}}</text>
             </view>

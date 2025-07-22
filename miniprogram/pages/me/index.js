@@ -146,6 +146,23 @@ Page({
                 });
             }
         });
+    },
+
+    onClickGrid(e){
+        console.error('123')
+        const { index } = e.currentTarget.dataset // 获取传递的数据
+        console.error(index)
+
+         if(index == 0){
+             console.error('345')
+             // 我的订单
+                // 预订页面
+            wx.navigateTo({
+                url: '/pages/booking/order/order',
+                complete() {
+                }
+              })
+         }
     }
 
 

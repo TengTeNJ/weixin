@@ -1,0 +1,69 @@
+<view class="order-container">
+    <!-- Tab 切换栏 - 文案+下划线样式 -->
+    <view class="tab-bar">
+        <view class="tab-item" bindtap="switchTab" data-tab="placed">
+            <text class="{{currentTab === 'placed' ? 'tab-text active-text' : 'tab-text'}}">已下单</text>
+            <view class="{{currentTab === 'placed' ? 'tab-underline active' : 'tab-underline'}}"></view>
+        </view>
+        <!--中间的间距-->
+        <view class="space"></view>
+        <view class="tab-item" bindtap="switchTab" data-tab="cancelled">
+            <text class="{{currentTab === 'cancelled' ? 'tab-text active-text' : 'tab-text'}}">已取消</text>
+            <view class="{{currentTab === 'cancelled' ? 'tab-underline active' : 'tab-underline'}}"></view>
+        </view>
+    </view>
+
+    <!-- 订单列表（根据 Tab 动态渲染） -->
+    <block wx:for="{{currentTab === 'placed' ? placedOrders : cancelledOrders}}" wx:key="orderId">
+        <view class="order-card">
+            <!-- 订单标题 & 地点 -->
+            <view class="order-header">
+                <view class="order-info">
+                    <text class="order-title">{{item.title}}</text>
+                    <view class="map-location">
+                        <image src="/images/order/map.png" class="map-image" mode="heightFix"></image>
+                        <text class="order-location">{{item.location}}</text>
+                    </view>
+
+                </view>
+
+                <!-- 取消预约按钮（仅已下单订单显示） -->
+                <view class="cancel-btn" wx:if="{{currentTab === 'placed'}}" bindtap="handleCancel" data-orderid="{{item.orderId}}">
+                    取消预约
+                </view>
+            </view>
+
+            <!-- 场地信息分割线 -->
+            <view class="divider"></view>
+
+            <!-- 场地信息列表 -->
+            <view class="field-list">
+                <block wx:for="{{item.fields}}" wx:key="fieldId">
+                    <view class="field-item">
+                        <view class="cancel-field">
+                            <text class="field-name">{{item.fieldName}}</text>
+                            <text wx:if="{{currentTab === 'cancelled'}}" class="canceled">（已取消）</text>
+                        </view>
+
+                        <text class="field-time">{{item.time}}</text>
+                        <text class="field-price">¥{{item.price}}</text>
+                    </view>
+                </block>
+            </view>
+
+            <!-- 合计分割线 -->
+            <view class="divider"></view>
+
+            <!-- 合计金额 -->
+            <view class="total-amount">
+                <view class="total-title">合计金额</view>
+                <view class="total-money">¥{{item.totalAmount}}</view>
+            </view>
+        </view>
+    </block>
+
+    <!-- 空状态提示 -->
+    <view wx:if="{{(currentTab === 'placed' && placedOrders.length === 0) || (currentTab === 'cancelled' && cancelledOrders.length === 0)}}" class="empty-state">
+        <text>暂无{{currentTab === 'placed' ? '已下单' : '已取消'}}的订单</text>
+    </view>
+</view>
