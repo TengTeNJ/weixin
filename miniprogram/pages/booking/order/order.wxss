@@ -64,15 +64,17 @@
     margin-bottom: 12px;
 }
 
-.map-location{
+.map-location {
     display: flex;
-  flex-direction: row;
-  align-items: center;
+    flex-direction: row;
+    align-items: center;
 }
-.map-image{
+
+.map-image {
     height: 24rpx;
     margin-right: 12rpx;
 }
+
 .order-info {
     flex: 1;
 }

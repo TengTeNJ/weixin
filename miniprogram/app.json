@@ -22,7 +22,7 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/bottom/home.png",
+        "iconPath": "images/bottom/home-no.png",
         "selectedIconPath": "images/bottom/home.png"
       },
       {
@@ -34,10 +34,12 @@
       {
         "pagePath": "pages/me/index",
         "text": "我的",
-        "iconPath": "images/bottom/mine.png",
+        "iconPath": "images/bottom/mine-no.png",
         "selectedIconPath": "images/bottom/mine.png"
       }
-    ]
+    ],
+    "iconWidth": "40px",   
+    "spacing": "20px" 
   },
   "permission": {
     "scope.userInfo": {

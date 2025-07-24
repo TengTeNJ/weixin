@@ -1,4 +1,5 @@
-import fieldApi from '../../api/field';
+import pay from '../../api/pay';
+
 Page({
     data: {
       bannerList: [
@@ -27,6 +28,7 @@ Page({
       wx.makePhoneCall({
         phoneNumber: '12345678900'
       })
+      pay.weiChatPay([1],'18168606832');
     },
 
     /**菜单点击 */

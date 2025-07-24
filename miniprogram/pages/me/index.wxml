@@ -27,13 +27,13 @@
 
   <!-- <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}"></image> -->
   <view class="user-text">
-    <view class="nickname">{{userInfo.nickName || '点击登录'}}</view>
+    
+    <view class="nickname">{{userInfo.nickName || '昵称'}}</view>
    <!--手机号-->
     <view wx:if="{{userInfo.phoneNumber}}" wx:class="phone">
       {{userInfo.phoneNumber ?  userInfo.phoneNumber : '未绑定手机号'}}
     </view>
-    <button wx:else open-type="getPhoneNumber" size="mini" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">获取手机号</button>
-
+    <button wx:else open-type="getPhoneNumber" size="mini" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">点击登录</button>
   </view>
   <view class="balance">余额 ￥{{userInfo.balance || '0.00'}}</view>
 </view>

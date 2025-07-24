@@ -13,7 +13,7 @@ export default {
    * @returns {Array<Object>} return.data - 场地列表
    */
   getFieldPriceList() {
-    return http.get('/api/fieldInfo/getFieldInfoPriceList');
+    return http.get('/api/fieldInfo/getFieldInfoPriceList',{});
   },
 
   /**
