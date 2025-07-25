@@ -10,8 +10,8 @@
   <view class="selected-time-list">
     <view class="time-item" wx:for="{{selectedTimes}}" wx:key="index">
       <text>{{item.date}}</text>
-      <text>{{item.court}}</text>
-      <text>{{item.time}}</text>
+      <text>{{item.fieldName}}</text>
+      <text>{{item.startTime}} - {{item.endTime}}</text>
     </view>
   </view>
 

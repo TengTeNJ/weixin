@@ -1,3 +1,5 @@
+import account from '../../api/account'
+import userUtils from '../../utils/user'
 Page({
     data: {
         userInfo: {
@@ -67,7 +69,7 @@ Page({
             wx.getUserProfile({
                 desc: '获取您的头像与昵称',
                 success(res) {
-                    console.error('123',res);
+                    console.error('123', res);
                     const {
                         avatarUrl,
                         nickName
@@ -101,20 +103,35 @@ Page({
         }
     },
 
+    // 初始化函数
+    onLoad(){
+     const userInfo = userUtils.getUserInfo();
+     console.error('userInfo',userInfo)
+     this.setData({
+        userInfo:userInfo
+     })
+    },
+
+    // 点击头像
     onChooseAvatar(e) {
-        const { avatarUrl } = e.detail // 头像临时路径
-        this.setData({  'userInfo.avatarUrl' : avatarUrl })
-        console.error('345',e.detail);
-
-        // 上传头像到服务器（可选）
-       // wx.uploadFile({ url: 'your_api', filePath: avatarUrl, name: 'avatar' })
-      },
-
-    onGetPhoneNumber(e) {
         const {
-            code
+            avatarUrl
+        } = e.detail // 头像临时路径
+        this.setData({
+            'userInfo.avatarUrl': avatarUrl
+        })
+        userUtils.saveUserInfo(this.data.userInfo);
+        // 上传头像到服务器（可选）
+        // wx.uploadFile({ url: 'your_api', filePath: avatarUrl, name: 'avatar' })
+    },
+
+    // 获取手机号
+    async onGetPhoneNumber(e) {
+        const {
+            code,
+            encryptedData,
+            iv
         } = e.detail;
-        console.error('111',e.detail)
         if (!code) {
             wx.showToast({
                 title: '用户取消授权',
@@ -122,47 +139,59 @@ Page({
             });
             return;
         }
-
-        wx.cloud.callFunction({
-            name: 'getPhoneNumber',
-            data: {
-                code
-            },
-            success: res => {
-                console.error('success',res)
-                const phone = res.result.phoneNumber;
-                this.setData({
-                    'userInfo.phoneNumber': phone
-                });
-                wx.showToast({
-                    title: '手机号绑定成功'
-                });
-            },
-            fail: err => {
-                console.error('手机号获取失败', err);
-                wx.showToast({
-                    title: '获取手机号失败',
-                    icon: 'none'
-                });
-            }
+        const result = await account.weixinPhoneLogin(encryptedData, iv);
+        this.setData({
+            'userInfo.avatarUrl': result.data.avatar,
+            'userInfo.nickName': result.data.nickName,
+            'userInfo.phoneNumber': result.data.accountNo || result.data.nickName
         });
+        // 存储用户信息
+        userUtils.saveUserInfo(this.data.userInfo)
+        // 获取token 并进行存储
+        const token = result.data.memberToken;
+        userUtils.saveToken(token);
+        // 云函数的流程
+        // wx.cloud.callFunction({
+        //     name: 'getPhoneNumber',
+        //     data: {
+        //         code
+        //     },
+        //     success: res => {
+        //         console.error('success',res)
+        //         const phone = res.result.phoneNumber;
+        //         this.setData({
+        //             'userInfo.phoneNumber': phone
+        //         });
+        //         wx.showToast({
+        //             title: '手机号绑定成功'
+        //         });
+        //     },
+        //     fail: err => {
+        //         console.error('手机号获取失败', err);
+        //         wx.showToast({
+        //             title: '获取手机号失败',
+        //             icon: 'none'
+        //         });
+        //     }
+        // });
     },
 
-    onClickGrid(e){
+    onClickGrid(e) {
         console.error('123')
-        const { index } = e.currentTarget.dataset // 获取传递的数据
+        const {
+            index
+        } = e.currentTarget.dataset // 获取传递的数据
         console.error(index)
 
-         if(index == 0){
-             console.error('345')
-             // 我的订单
-                // 预订页面
+        if (index == 0) {
+            console.error('345')
+            // 我的订单
+            // 预订页面
             wx.navigateTo({
                 url: '/pages/booking/order/order',
-                complete() {
-                }
-              })
-         }
+                complete() {}
+            })
+        }
     }
 
 

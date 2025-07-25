@@ -33,7 +33,7 @@
     <view wx:if="{{userInfo.phoneNumber}}" wx:class="phone">
       {{userInfo.phoneNumber ?  userInfo.phoneNumber : '未绑定手机号'}}
     </view>
-    <button wx:else open-type="getPhoneNumber" size="mini" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">点击登录</button>
+    <button wx:else open-type="getPhoneNumber" size="mini" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">授权登录</button>
   </view>
   <view class="balance">余额 ￥{{userInfo.balance || '0.00'}}</view>
 </view>

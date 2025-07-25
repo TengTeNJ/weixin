@@ -43,6 +43,20 @@ async function getOpenId() {
     });
   }  
 
+    // 获取登录code
+    function getLoginCode() {
+        return new Promise((resolve, reject) => {
+          wx.login({
+            success(res) {
+              resolve(res.code);
+            },
+            fail(err) {
+              reject(err);
+            }
+          });
+        });
+      }
+
 
 // 获取格式化时间字符串 2025-07-24 15:30:55
 function getFormattedTime() {
@@ -60,5 +74,6 @@ module.exports = {
   formatTime,
   getOpenId,
   getLocalIP,
-  getFormattedTime
+  getFormattedTime,
+  getLoginCode
 };

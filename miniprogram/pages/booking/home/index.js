@@ -25,6 +25,7 @@ Page({
          ],
          */
         datasList: [], // 所有的时间段数据 按照左侧的场地区分
+        selectDataList: [], // 选中的场地列表
     },
 
     onLoad() {
@@ -36,13 +37,15 @@ Page({
             const label = i === 0 ? '今天' : i === 1 ? '明天' : i === 2 ? '后天' : weekMap[d.getDay()]
             dateList.push({
                 week: label,
-                day: d.getDate()
+                day: d.getDate(),
+                date:`${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
             })
         }
+        console.error('dateList',dateList)
 
-       
         this.setData({
-            dateList,        })
+            dateList,
+        })
         // 页面加载时获取场地列表
         this.loadFieldData();
     },
@@ -70,17 +73,33 @@ Page({
         const index = e.currentTarget.dataset.index
         const timeList = this.data.datasList[this.data.selectedVenueIndex]
         timeList[index].selected = !timeList[index].selected
-        console.error('selected', timeList[index])
+        // 把选中的加入
+        console.warn('timeList[index].selected ',timeList[index].selected)
+        if (timeList[index].selected == true) {
+            // 场地名称
+            timeList[index]['fieldName'] = this.data.venueList[selectedVenueIndex];
+            // 场地日期
+            timeList[index]['date'] = this.data.dateList[this.data.selectedDateIndex]['date']
+            this.data.selectDataList.push(timeList[index]);
+            console.error('selected', timeList[index])
+        } else {
+            // 反选的需要移除
+            //const index = this.data.selectDataList.indexOf(timeList[index]); // 找到值为3的索引
+            console.warn('index',index)
+            const deletedIndex = this.data.selectDataList.findIndex(item => (item.priceId === timeList[index].priceId && item.fieldId === timeList[index].fieldId));
+            if (index !== -1) {
+                console.error('移除',timeList[index].startTime)
+                this.data.selectDataList.splice(deletedIndex, 1); // 从该索引位置移除一个元素
+            }
+        }
         // ✅ 正确方式：通过 setData 触发视图更新
-        // ✅ 正确写法：使用 setData 更新
         const key = `datasList[${selectedVenueIndex}][${index}].selected`;
-        console.error('key',key)
         this.setData({
             [key]: timeList[index].selected
-        },() => {
+        }, () => {
             // ✅ setData 回调中确认数据已更新
             console.log('数据已更新:', timeList[index].selected);
-          });
+        });
         const total = timeList.filter(i => i.selected).reduce((sum, item) => sum + item.periodPrice, 0)
         this.setData({
             timeList,
@@ -104,8 +123,11 @@ Page({
             })
             return
         }
+        // 序列化选中的数据 传输到下一个页面
+        const encoded = encodeURIComponent(JSON.stringify(this.data.selectDataList));
+
         wx.navigateTo({
-            url: '/pages/booking/order/sendorder'
+            url: `/pages/booking/order/sendorder?data=${encoded}`
         })
     },
     /**
@@ -134,7 +156,7 @@ Page({
 
             if (result.data && result.data.length > 0) {
                 // 获取场地数据
-                result.data.forEach(function (currentValue, index, array) {
+                result.data.forEach(function (currentValue) {
                     currentValue.fieldPriceList.forEach(function (element, index) {
                         element.selected = false
                     });
