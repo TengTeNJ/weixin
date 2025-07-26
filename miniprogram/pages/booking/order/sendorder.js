@@ -2,7 +2,7 @@ import userUtils from '../../../utils/user'
 import pay from '../../../api/pay'
 Page({
     data: {
-        venueImage: '/images/home/banner1.png',
+        venueImage: '/images/order/top.png',
         venueName: 'Potent智能网球训练馆',
         venueAddress: '南通市崇川区桃园路7号南通体育会展中心2009-1',
         selectedTimes: [],
@@ -43,26 +43,29 @@ Page({
         // 调用后台接口
         const res = await pay.weiChatPay(priceIds);
         const {
+            timeStamp,
             nonceStr,
             paySign,
             signType
         } = res.data;
-        const timestamp = String(Math.floor((Date.now() + 8 * 60 * 60 * 1000) / 1000));
+       // const timestamp = String(Math.floor((Date.now() + 8 * 60 * 60 * 1000) / 1000));
         const _package = res.data.package;
         console.error({
-            nonceStr: nonceStr,
+            nonceStr,
+            paySign,
+            timeStamp,
+            signType,
             package: _package,
-            paySign: paySign,
-            timeStamp: timestamp
-        })
+            })
         // 拉起收银台
         wx.requestPayment({
-            nonceStr: nonceStr,
+            nonceStr,
+            paySign,
+            timeStamp,
+            signType,
             package: _package,
-            paySign: paySign,
-            timeStamp: timestamp,
             success(res) {
-                wx.navigateTo({
+                wx.navreigateTo({
                     url: '/pages/booking/success/index'
                 })
             },

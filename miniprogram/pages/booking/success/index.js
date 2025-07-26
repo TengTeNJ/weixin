@@ -71,5 +71,12 @@ Page({
         wx.reLaunch({
             url: '/pages/index/index' // 替换为你的首页路径
         })
+    },
+
+    /**跳转到订单页面 */
+    checkOrder(){
+        wx.redirectTo({
+            url: '/pages/booking/success/index'
+        })
     }
 })

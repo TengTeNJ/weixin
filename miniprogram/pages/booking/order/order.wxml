@@ -19,10 +19,10 @@
             <!-- 订单标题 & 地点 -->
             <view class="order-header">
                 <view class="order-info">
-                    <text class="order-title">{{item.title}}</text>
+                    <text class="order-title">{{item.createTime}}</text>
                     <view class="map-location">
                         <image src="/images/order/map.png" class="map-image" mode="heightFix"></image>
-                        <text class="order-location">{{item.location}}</text>
+                        <text class="order-location">Potent 智能网球训练馆</text>
                     </view>
 
                 </view>
@@ -38,15 +38,15 @@
 
             <!-- 场地信息列表 -->
             <view class="field-list">
-                <block wx:for="{{item.fields}}" wx:key="fieldId">
+                <block wx:for="{{item.orderFieldVoList}}" wx:key="fieldId">
                     <view class="field-item">
                         <view class="cancel-field">
                             <text class="field-name">{{item.fieldName}}</text>
                             <text wx:if="{{currentTab === 'cancelled'}}" class="canceled">（已取消）</text>
                         </view>
 
-                        <text class="field-time">{{item.time}}</text>
-                        <text class="field-price">¥{{item.price}}</text>
+                        <text class="field-time">{{item.startTime}} - {{item.endTime}}</text>
+                        <text class="field-price">¥{{item.periodPrice}}</text>
                     </view>
                 </block>
             </view>
@@ -57,7 +57,7 @@
             <!-- 合计金额 -->
             <view class="total-amount">
                 <view class="total-title">合计金额</view>
-                <view class="total-money">¥{{item.totalAmount}}</view>
+                <view class="total-money">¥{{item.orderMoney}}</view>
             </view>
         </view>
     </block>

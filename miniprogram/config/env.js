@@ -1,11 +1,11 @@
 /**
- * 环境配置
+ * 环境配置 http://13.49.0.47:91 http://221.229.219.110:8891
  * 切换环境只需修改 currentEnv 的值
  */
 const envConfig = {
     // 开发环境
     development: {
-      baseUrl: 'http://13.49.0.47:91'
+      baseUrl: 'http://221.229.219.110:8891'
     },
     // 测试环境
     test: {

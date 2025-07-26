@@ -56,25 +56,33 @@ Page({
         //   })
         const res = await pay.weiChatPay([7]);
         const {
+            timeStamp,
             nonceStr,
             paySign,
             signType
         } = res.data;
-        const timestamp = String(Math.floor((Date.now() + 8 * 60 * 60 * 1000) / 1000));
+        // const timestamp = String(Math.floor((Date.now() + 8 * 60 * 60 * 1000) / 1000));
+        console.error('timeStamp',timeStamp)
         const _package = res.data.package;
         console.error({
-            nonceStr: nonceStr,
+            nonceStr,
+            paySign,
+           timeStamp,
+           signType,
             package: _package,
-            paySign: paySign,
-            timeStamp: timestamp
         })
+        console.error('timeStamp---',timeStamp)
+
         wx.requestPayment({
-            nonceStr: nonceStr,
+            nonceStr,
+            paySign,
+            timeStamp,
+            signType,
             package: _package,
-            paySign: paySign,
-            timeStamp: timestamp,
             success(res) {},
-            fail(res) {}
+            fail(error) {
+                console.error('支付失败',error)
+            }
         })
     },
 

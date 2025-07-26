@@ -7,7 +7,6 @@
 .venue-image {
     margin-top: 100rpx;
     width: calc(100% - 200rpx);
-    height: 188rpx;
     object-fit: cover;
     margin-bottom: 36rpx;
 }

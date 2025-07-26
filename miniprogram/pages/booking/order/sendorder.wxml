@@ -1,6 +1,6 @@
 <view class="container">
   <!-- 场地图片 -->
-  <image class="venue-image" src="{{venueImage}}" mode="aspectFill" />
+  <image class="venue-image" src="{{venueImage}}" mode="widthFix" />
 
   <!-- 场地名称和地址 -->
   <view class="venue-name">{{venueName}}</view>
