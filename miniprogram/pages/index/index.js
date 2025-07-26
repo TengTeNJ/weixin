@@ -1,5 +1,5 @@
 import pay from '../../api/pay';
-
+import field from '../../api/field'
 Page({
     data: {
         bannerList: [
@@ -24,65 +24,41 @@ Page({
             }
         ],
         bookingList: [{
-                date: '07-30',
-                time: '今天',
-                price: '￥40 起'
-            },
-            {
-                date: '07-31',
-                time: '明天',
-                price: '￥40 起'
-            },
-            {
-                date: '08-01',
-                time: '周一',
-                price: '￥40 起'
-            },
-            {
-                date: '08-02',
-                time: '周二',
-                price: '￥40 起'
-            }
-        ],
+            bookDate: '07-30',
+            weekDate: '今天',
+            periodPrice: '￥40 起'
+        }, ],
         matchList: [
             '/images/home/activity1.png',
             '/images/home/activity1.png'
         ]
     },
+
+    async onLoad(option) {
+        this.getDayBestOfferData()
+    },
+
+    /**
+     *获取最近七天的最优惠的场地数据
+     */
+    async getDayBestOfferData() {
+        const res = await field.getDayBestOfferData();
+        const newList = res.data.indexBookVoList.map(item => {
+            return {
+                ...item,
+                bookDate: item.bookDate.length > 5 ?
+                    item.bookDate.slice(-5) :
+                    item.bookDate
+            };
+        });
+        this.setData({
+            bookingList: newList
+        })
+    },
     /**拨打电话 */
     async callPhone() {
-        //   wx.makePhoneCall({
-        //     phoneNumber: '12345678900'
-        //   })
-        const res = await pay.weiChatPay([7]);
-        const {
-            timeStamp,
-            nonceStr,
-            paySign,
-            signType
-        } = res.data;
-        // const timestamp = String(Math.floor((Date.now() + 8 * 60 * 60 * 1000) / 1000));
-        console.error('timeStamp',timeStamp)
-        const _package = res.data.package;
-        console.error({
-            nonceStr,
-            paySign,
-           timeStamp,
-           signType,
-            package: _package,
-        })
-        console.error('timeStamp---',timeStamp)
-
-        wx.requestPayment({
-            nonceStr,
-            paySign,
-            timeStamp,
-            signType,
-            package: _package,
-            success(res) {},
-            fail(error) {
-                console.error('支付失败',error)
-            }
+        wx.makePhoneCall({
+            phoneNumber: '12345678900'
         })
     },
 
@@ -98,7 +74,24 @@ Page({
                 url: '/pages/booking/home/index',
                 complete() {}
             })
+        } else {
+            wx.showToast({
+                title: '敬请期待',
+                icon: 'none'
+            })
         }
+    },
+
+    /**
+     * 去选择场地页面
+     */
+    toFieldPage(e) {
+        const {
+            index
+        } = e.currentTarget.dataset;
+        wx.navigateTo({
+            url: `/pages/booking/home/index?fieldIndex=${index}`,
+        })
     },
 
     /**比赛卡片点击 */

@@ -37,11 +37,14 @@ Page({
     },
 
     async onPay() {
+
+        const fieldInfo = this.data.selectedTimes[0];
+
         const priceIds = this.data.selectedTimes.map(item => (
             item.priceId));
         console.error('priceIds', priceIds)
         // 调用后台接口
-        const res = await pay.weiChatPay(priceIds);
+        const res = await pay.weiChatPay(priceIds,fieldInfo.date);
         const {
             timeStamp,
             nonceStr,

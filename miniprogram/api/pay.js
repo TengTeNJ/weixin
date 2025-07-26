@@ -14,14 +14,14 @@ export default {
     /**
      * 支付接口
      */
-    async weiChatPay(priceIdList) {
+    async weiChatPay(priceIdList,bookDate) {
         try {
             const ip = await utils.getLocalIP(); // 等待 IP 获取
             console.log('获取到 IP:', ip);
 
             // 获取当前时间
-            const formatDate = utils.getFormattedTime();
-            console.log('当前时间:', formatDate);
+            // const formatDate = utils.getFormattedTime();
+            // console.log('当前时间:', formatDate);
 
             // 3. 获取 openid
             const wxOpenId = get(STORAGE_KEYS.OPENID);
@@ -34,7 +34,7 @@ export default {
             // 请求接口，携带 ip 和时间支付请求
             return http.post('/api/pay/prepay', {
                 clientIp: ip,
-                bookDate: formatDate,
+                bookDate: bookDate,
                 priceIdList,
                 wxOpenId,
                 'memberId': '1722478624',

@@ -101,8 +101,15 @@
 }
 
 .total-amount {
-    font-size: 28rpx;
-    color: #333;
+    font-weight: 400;
+    font-size: 12px;
+    color: #181818;
+}
+
+.total-money {
+    font-weight: 400;
+    font-size: 14px;
+    color: #E96415;
 }
 
 .pay-btn {

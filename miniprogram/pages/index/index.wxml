@@ -42,10 +42,14 @@
 <view class="section-title">订场</view>
 <scroll-view scroll-x class="scroll-x-wrapper">
   <view class="scroll-content">
-    <view class="booking-card" wx:for="{{bookingList}}" wx:key="index">
-    <view class="booking-date">{{item.date}}</view>
-    <view class="booking-time">{{item.time}}</view>
-    <view class="booking-price">{{item.price}}</view>
+    <view class="booking-card" wx:for="{{bookingList}}" wx:key="index" data-index="{{index}}" bind:tap="toFieldPage">
+    <view class="booking-date">{{ item.bookDate}}</view>
+    <view class="booking-time">{{item.weekDate}}</view>
+    <view class="gray-line"></view>
+    <view class="next">
+        <view class="booking-price">{{item.periodPrice}}元起</view>
+        <image src="/images/home/next.png" class="next-image" mode="heightFix"></image>
+    </view>
   </view>
   </view>
 </scroll-view>

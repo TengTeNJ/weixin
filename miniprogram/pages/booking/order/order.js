@@ -40,10 +40,9 @@ Page({
         });
         var orderStatus = 1;
         if (tab != 'placed') {
-            orderStatus = 2;
+            orderStatus = 3;
         }
         this.refreshOrderListData(orderStatus);
-
     },
 
     // 取消预约事件

@@ -4,7 +4,7 @@
     <scroll-view scroll-x class="date-scroll" enable-flex>
         <view class="date-item" wx:for="{{dateList}}" wx:key="index" bindtap="onDateSelect" data-index="{{index}}" style="{{selectedDateIndex === index ? 'color: #FF5A00' : ''}}">
             <view class="date-week">{{item.week}}</view>
-            <view class="date-day" style="{{selectedDateIndex === index ? 'background:#FF5A00;color:#fff;' : ''}}">{{item.day}}</view>
+            <view class="date-day" style="{{selectedDateIndex == index ? 'background:#FF5A00;color:#fff;' : ''}}">{{item.day}}</view>
         </view>
     </scroll-view>
 
@@ -33,7 +33,8 @@
     <!-- 3. 底部悬浮区域 -->
     <view class="bottom-bar">
         <view class="notice" bindtap="onNoticeTap">
-            <text>ℹ️ 预订须知</text>
+        <image src="/images/order/info.png" class="info-image" mode="heightFix"></image>
+            <text class="">预订须知</text>
         </view>
         <view class="book-btn" bindtap="onBookNow">
             ￥{{totalPrice}} 立即预定

@@ -184,13 +184,17 @@ Page({
         console.error(index)
 
         if (index == 0) {
-            console.error('345')
             // 我的订单
             // 预订页面
             wx.navigateTo({
                 url: '/pages/booking/order/order',
                 complete() {}
             })
+        }else{
+            wx.showToast({
+                title: '敬请期待',
+                icon: 'none'
+              })
         }
     }
 

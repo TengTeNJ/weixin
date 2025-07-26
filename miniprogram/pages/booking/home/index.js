@@ -28,7 +28,7 @@ Page({
         selectDataList: [], // 选中的场地列表
     },
 
-    onLoad() {
+    async onLoad(options) {
         const today = new Date()
         const weekMap = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
         const dateList = []
@@ -38,22 +38,51 @@ Page({
             dateList.push({
                 week: label,
                 day: d.getDate(),
-                date:`${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
+                date: `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate()}`
             })
         }
-        console.error('dateList',dateList)
-
         this.setData({
             dateList,
         })
         // 页面加载时获取场地列表
-        this.loadFieldData();
+        await this.loadFieldData();
+        const fieldIndex = options.fieldIndex;
+        if(fieldIndex != undefined){
+            // 传递过来的参数是字符串类型，所以必须要转换成fieldIndex，要不然类型不一样可能会有问题，比如我们发现不刷新页面
+            // 因为wxml中用了精准比较selectedDateIndex === index，所以类型不一样就不认为一样了
+            this.setData({
+                selectedDateIndex:parseInt(fieldIndex)
+            })
+        }
+
+    
+
     },
 
+    /**
+     * 顶部的日期选择
+     * @param {*} e 
+     */
     onDateSelect(e) {
+        if (this.data.selectedDateIndex == e.currentTarget.dataset.index) {
+            console.error('防止重复点击');
+            return;
+        }
+        // 把所有的数据选中状态清空
+        this.data.datasList.forEach(subArr => {
+            subArr.forEach(item => {
+                item.selected = false;
+            });
+        });
+        // 清空选中的时间段列表
+        this.data.selectDataList.length = 0;
+        // 刷新页面
         this.setData({
-            selectedDateIndex: e.currentTarget.dataset.index
+            selectedDateIndex: e.currentTarget.dataset.index,
+            datasList: this.data.datasList,
+            totalPrice: 0
         })
+
     },
 
     onVenueSelect(e) {
@@ -74,7 +103,7 @@ Page({
         const timeList = this.data.datasList[this.data.selectedVenueIndex]
         timeList[index].selected = !timeList[index].selected
         // 把选中的加入
-        console.warn('timeList[index].selected ',timeList[index].selected)
+        console.warn('timeList[index].selected ', timeList[index].selected)
         if (timeList[index].selected == true) {
             // 场地名称
             timeList[index]['fieldName'] = this.data.venueList[selectedVenueIndex];
@@ -82,14 +111,16 @@ Page({
             timeList[index]['date'] = this.data.dateList[this.data.selectedDateIndex]['date']
             this.data.selectDataList.push(timeList[index]);
             console.error('selected', timeList[index])
+            this.data.totalPrice += timeList[index].periodPrice;
         } else {
             // 反选的需要移除
             //const index = this.data.selectDataList.indexOf(timeList[index]); // 找到值为3的索引
-            console.warn('index',index)
+            console.warn('index', index)
             const deletedIndex = this.data.selectDataList.findIndex(item => (item.priceId === timeList[index].priceId && item.fieldId === timeList[index].fieldId));
             if (index !== -1) {
-                console.error('移除',timeList[index].startTime)
+                console.error('移除', timeList[index].startTime)
                 this.data.selectDataList.splice(deletedIndex, 1); // 从该索引位置移除一个元素
+                this.data.totalPrice -= timeList[index].periodPrice;
             }
         }
         // ✅ 正确方式：通过 setData 触发视图更新
@@ -100,10 +131,10 @@ Page({
             // ✅ setData 回调中确认数据已更新
             console.log('数据已更新:', timeList[index].selected);
         });
-        const total = timeList.filter(i => i.selected).reduce((sum, item) => sum + item.periodPrice, 0)
+       // const total = timeList.filter(i => i.selected).reduce((sum, item) => sum + item.periodPrice, 0)
         this.setData({
             timeList,
-            totalPrice: total
+            totalPrice: this.data.totalPrice 
         })
     },
 

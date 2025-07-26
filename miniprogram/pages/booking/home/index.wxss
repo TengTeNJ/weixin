@@ -49,19 +49,19 @@
 }
 
 .venue-item {
-    padding: 30rpx 0;
+    padding: 32rpx 32rpx;
     text-align: center;
     font-size: 26rpx;
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 .triangle {
     font-size: 20rpx;
-    color: #999;
+    color:#E96415;
     margin-left: 6rpx;
 }
 
@@ -120,8 +120,11 @@
 }
 
 .notice {
+    display: flex;
+    flex-direction: column;
     color: #999;
     font-size: 24rpx;
+    align-items: center;
 }
 
 .book-btn {
@@ -130,4 +133,15 @@
     padding: 20rpx 40rpx;
     border-radius: 40rpx;
     font-size: 28rpx;
+}
+
+.book-info {
+    font-weight: 300;
+    font-size: 16rpx;
+    color: #7B7B7B;
+}
+
+.info-image{
+    margin-bottom: 6rpx;
+    height: 40rpx;
 }

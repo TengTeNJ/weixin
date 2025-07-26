@@ -23,5 +23,12 @@ export default {
    */
   getFieldDetail(fieldId) {
     return http.get('/api/fieldInfo/getFieldDetail', { fieldId });
+  },
+
+/**
+ * 获取最近七天的最优惠的场地数据
+ */
+  getDayBestOfferData(){
+    return http.get('/api/index/home', {});
   }
 };
