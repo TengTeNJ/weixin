@@ -68,11 +68,14 @@ Page({
             signType,
             package: _package,
             success(res) {
-                wx.navreigateTo({
+                console.log('支付成功',res)
+                wx.navigateTo({
                     url: '/pages/booking/success/index'
                 })
             },
-            fail(res) {}
+            fail(error) {
+                console.error('error',error)
+            }
         })
 
         // 调用云函数支付逻辑（伪代码）

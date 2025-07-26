@@ -76,7 +76,7 @@ Page({
     /**跳转到订单页面 */
     checkOrder(){
         wx.redirectTo({
-            url: '/pages/booking/success/index'
+            url: '/pages/booking/order/order'
         })
     }
 })
