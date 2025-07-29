@@ -17,7 +17,7 @@
 
     <!-- 规则与小计 -->
     <view class="rule-price-row">
-        <text class="rule-text">退改规则</text>
+        <text class="rule-text">退改请联系客服</text>
         <text class="price-text">小计金额 ¥{{subtotal}}</text>
     </view>
 
@@ -26,7 +26,7 @@
         <text>手机号</text>
         <view class="phone-box">
             <text class="user-phone">{{phoneNumber}}</text>
-            <text class="edit-btn" bindtap="onEditPhone">修改</text>
+            <!-- <text class="edit-btn" bindtap="onEditPhone">修改</text> -->
         </view>
     </view>
 

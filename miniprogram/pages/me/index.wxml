@@ -52,7 +52,7 @@
     <!-- 下方列表入口 -->
     <view class="list-container">
         <block wx:for="{{listItems}}" wx:key="index">
-            <view class="list-item">
+            <view class="list-item" data-index="{{index}}" bind:tap="toNextPage">
                 <view class="left">
                     <image class="list-icon" src="{{item.icon}}"></image>
                     <text class="list-title">{{item.title}}</text>

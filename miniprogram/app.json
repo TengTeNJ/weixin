@@ -26,12 +26,6 @@
         "selectedIconPath": "images/bottom/home.png"
       },
       {
-        "pagePath": "pages/scan/index",
-        "text": "",
-        "iconPath": "images/bottom/scan.png",
-        "selectedIconPath": "images/bottom/scan.png"
-      },
-      {
         "pagePath": "pages/me/index",
         "text": "我的",
         "iconPath": "images/bottom/mine-no.png",

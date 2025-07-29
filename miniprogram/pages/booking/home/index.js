@@ -1,4 +1,5 @@
 import fieldApi from '../../../api/field';
+import utils from '../../../utils/util'
 Page({
     data: {
         // 场地列表数据
@@ -44,19 +45,17 @@ Page({
         this.setData({
             dateList,
         })
-        // 页面加载时获取场地列表
-        await this.loadFieldData();
+        
         const fieldIndex = options.fieldIndex;
-        if(fieldIndex != undefined){
+        if (fieldIndex != undefined) {
             // 传递过来的参数是字符串类型，所以必须要转换成fieldIndex，要不然类型不一样可能会有问题，比如我们发现不刷新页面
             // 因为wxml中用了精准比较selectedDateIndex === index，所以类型不一样就不认为一样了
             this.setData({
-                selectedDateIndex:parseInt(fieldIndex)
+                selectedDateIndex: parseInt(fieldIndex)
             })
         }
-
-    
-
+        // 页面加载时获取场地列表
+        await this.loadFieldData();
     },
 
     /**
@@ -82,7 +81,7 @@ Page({
             datasList: this.data.datasList,
             totalPrice: 0
         })
-
+        this.loadFieldData();
     },
 
     onVenueSelect(e) {
@@ -95,12 +94,19 @@ Page({
         })
     },
 
+    /**
+     * 选中/反选时间段
+     */
     toggleSlot(e) {
         const {
             selectedVenueIndex
         } = this.data;
         const index = e.currentTarget.dataset.index
         const timeList = this.data.datasList[this.data.selectedVenueIndex]
+        if (timeList[index].bookFlag) {
+            console.warn('已经被预定,不可使用')
+            return;
+        }
         timeList[index].selected = !timeList[index].selected
         // 把选中的加入
         console.warn('timeList[index].selected ', timeList[index].selected)
@@ -131,10 +137,10 @@ Page({
             // ✅ setData 回调中确认数据已更新
             console.log('数据已更新:', timeList[index].selected);
         });
-       // const total = timeList.filter(i => i.selected).reduce((sum, item) => sum + item.periodPrice, 0)
+        // const total = timeList.filter(i => i.selected).reduce((sum, item) => sum + item.periodPrice, 0)
         this.setData({
             timeList,
-            totalPrice: this.data.totalPrice 
+            totalPrice: this.data.totalPrice
         })
     },
 
@@ -165,20 +171,22 @@ Page({
      * 加载场地数据
      */
     async loadFieldData() {
+        const _this = this;
         try {
             this.setData({
                 loading: true
             });
-
+            // 当前选中的日期
+            const dateObject = this.data.dateList[this.data.selectedDateIndex];
+            const bookDate = dateObject.date;
             // 调用API获取数据
-            const result = await fieldApi.getFieldPriceList();
-
+            const result = await fieldApi.getFieldPriceList(bookDate);
             // 处理返回的场地数据
             this.setData({
                 fieldList: result.data || [],
                 loading: false
             });
-            console.error(this.data.fieldList)
+            //await fieldApi.getFieldDetail(1,bookDate)
             // 打印第一个场地的信息（如果有）
             let fieldNames = ['训练场'];
             let datas = [
@@ -189,6 +197,13 @@ Page({
                 // 获取场地数据
                 result.data.forEach(function (currentValue) {
                     currentValue.fieldPriceList.forEach(function (element, index) {
+                        // 如果当前的时间（肯定是今天的）已经晚于时间段的开始时间，则不可用 
+                        if (_this.data.selectedDateIndex == 0 && !element.bookFlag) {
+                            const beforeStart = utils.isBeforeStartTime(element.startTime);
+                            if (!beforeStart) {
+                                element.bookFlag = true;
+                            }
+                        }
                         element.selected = false
                     });
                     // 执行操作
@@ -208,7 +223,6 @@ Page({
                 datasList: datas
             })
 
-            console.error('123', this.data.datasList)
         } catch (error) {
             console.error('加载场地数据失败:', error);
             this.setData({

@@ -2,9 +2,9 @@ import userUtils from '../../../utils/user'
 import pay from '../../../api/pay'
 Page({
     data: {
-        venueImage: '/images/order/top.png',
+        venueImage: '/images/home/banner2.png',
         venueName: 'Potent智能网球训练馆',
-        venueAddress: '南通市崇川区桃园路7号南通体育会展中心2009-1',
+        venueAddress: '南通市崇川区桃园路7号南通体育会展中心L2009-1',
         selectedTimes: [],
         phoneNumber: '-',
         subtotal: 0,

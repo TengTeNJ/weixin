@@ -166,7 +166,7 @@
 }
 
 .match-card {
-    width: 650rpx;
+    width: 100%;
     height: 272rpx;
     overflow: hidden;
     margin-right: 24rpx;

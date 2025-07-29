@@ -1,4 +1,5 @@
 import orderUtils from '../../../api/order'
+import utils from '../../../utils/util'
 Page({
     data: {
         currentTab: 'placed', // 默认显示“已下单”
@@ -17,16 +18,22 @@ Page({
      */
     async refreshOrderListData(orderStatus) {
         const res = await orderUtils.getOrderList(1, orderStatus)
-        console.error('orderStatus',orderStatus)
-
+        var datas = res.data;
+        datas = datas.map(item => {
+            return {
+              ...item,
+              bookDate:item && item.orderFieldVoList && item.orderFieldVoList[0].bookDate,
+              weekDay: utils.getWeekday(item && item.orderFieldVoList && item.orderFieldVoList[0].bookDate)
+            };
+          });
         if (orderStatus == 1) {
             this.setData({
-                placedOrders: res.data
+                placedOrders: datas
             })
         } else {
             console.error('orderStatus',res.data)
             this.setData({
-                cancelledOrders: res.data
+                cancelledOrders: datas
             })
         }
     },

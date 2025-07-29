@@ -177,7 +177,6 @@ Page({
     },
 
     onClickGrid(e) {
-        console.error('123')
         const {
             index
         } = e.currentTarget.dataset // 获取传递的数据
@@ -196,6 +195,16 @@ Page({
                 icon: 'none'
               })
         }
+    },
+
+    toNextPage(e){
+        const {
+            index
+        } = e.currentTarget.dataset // 获取传递的数据
+        wx.showToast({
+            title: '敬请期待',
+            icon: 'none'
+          })
     }
 
 

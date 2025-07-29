@@ -23,8 +23,8 @@
         <!-- 右侧时间段列表 -->
         <scroll-view scroll-y class="time-slot-scroll">
             <view class="time-slot" wx:for="{{datasList[selectedVenueIndex]}}" wx:key="index" style="{{item.selected ? 'background: #FF5A00; color: #FFFFFF;' : ''}}" bindtap="toggleSlot" data-index="{{index}}">
-                <view class="  {{ item.selected ? 'selected-time-text ' :'time-range'}}">{{item.startTime}} - {{item.endTime}}</view>
-                <view class="{{ item.selected ? 'selected-time-text ' :'price'}}">￥{{item.periodPrice}}</view>
+                <view class="  {{ item.selected ? 'selected-time-text ' : item.bookFlag ?'notAviable' :'time-range'}}">{{item.startTime}} - {{item.endTime}}</view>
+                <view class="{{ item.selected ? 'selected-time-text ' : item.bookFlag ?'notAviable':'price'}}">￥{{item.periodPrice}}</view>
             </view>
         </scroll-view>
 

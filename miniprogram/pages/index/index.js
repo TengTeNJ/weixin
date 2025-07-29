@@ -30,7 +30,7 @@ Page({
         }, ],
         matchList: [
             '/images/home/activity1.png',
-            '/images/home/activity1.png'
+            // '/images/home/activity1.png'
         ]
     },
 
@@ -58,7 +58,7 @@ Page({
     /**拨打电话 */
     async callPhone() {
         wx.makePhoneCall({
-            phoneNumber: '12345678900'
+            phoneNumber: '0513-81185605'
         })
     },
 
@@ -96,10 +96,10 @@ Page({
 
     /**比赛卡片点击 */
     onMatchClick(e) {
-        wx.showToast({
-            title: '点击了比赛卡片',
-            icon: 'none'
-        })
+        // wx.showToast({
+        //     title: '2025江苏省腾特杯网球邀请赛',
+        //     icon: 'none'
+        // })
     },
 
 })

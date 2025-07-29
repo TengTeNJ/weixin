@@ -12,7 +12,7 @@
     padding: 20rpx 0;
     white-space: nowrap;
     border-bottom: 1px solid #eee;
-    height: 100rpx;
+    height: 110rpx;
 }
 
 .date-item {
@@ -39,7 +39,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    height: calc(100vh - 240rpx);
+    height: calc(100vh - 340rpx);
 }
 
 .venue-menu {
@@ -144,4 +144,10 @@
 .info-image{
     margin-bottom: 6rpx;
     height: 40rpx;
+}
+
+.notAviable{
+    font-weight: 500;
+    font-size: 24rpx;
+    color: #D2D2D2;
 }
