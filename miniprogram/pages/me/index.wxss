@@ -40,13 +40,11 @@
     color: #999;
 }
 
-.hidden-btn {
-    padding: 24rpx;
-}
 
 .header-text{
     font-size: 24rpx;
 }
+
 
 .circle-avatar-button {
     width: 120rpx;          /* 直径 */
@@ -82,6 +80,10 @@
     margin: 78rpx 0;
 }
 
+.hidden-btn{
+}
+
+
 .grid-item {
     display: flex;
     flex-direction: column;
@@ -106,6 +108,7 @@
 .list-container {
     padding: 0 32rpx;
     width: calc(100% - 64rpx);
+    border-top: 1rpx solid #eee;
 }
 
 .list-item {

@@ -28,7 +28,7 @@
   <!-- <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}"></image> -->
   <view class="user-text">
     
-    <view class="nickname">{{userInfo.nickName || '昵称'}}</view>
+    <view class="nickname">{{userInfo.nickName || '未登录'}}</view>
    <!--手机号-->
     <view wx:if="{{userInfo.phoneNumber}}" wx:class="phone">
       {{userInfo.phoneNumber ?  userInfo.phoneNumber : '未绑定手机号'}}

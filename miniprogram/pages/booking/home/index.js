@@ -45,7 +45,7 @@ Page({
         this.setData({
             dateList,
         })
-        
+
         const fieldIndex = options.fieldIndex;
         if (fieldIndex != undefined) {
             // 传递过来的参数是字符串类型，所以必须要转换成fieldIndex，要不然类型不一样可能会有问题，比如我们发现不刷新页面
@@ -54,8 +54,11 @@ Page({
                 selectedDateIndex: parseInt(fieldIndex)
             })
         }
+    },
+
+    onShow() {
         // 页面加载时获取场地列表
-        await this.loadFieldData();
+         this.loadFieldData();
     },
 
     /**

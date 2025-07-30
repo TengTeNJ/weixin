@@ -58,7 +58,7 @@ Page({
     /**拨打电话 */
     async callPhone() {
         wx.makePhoneCall({
-            phoneNumber: '0513-81185605'
+            phoneNumber: '0513-81185608'
         })
     },
 
@@ -70,6 +70,10 @@ Page({
         console.log('索引:', index);
         if (index == 0) {
             // 预订页面
+            const app = getApp();
+            if (!app.globalData.checkLogin()) {
+                return; // 未登录则停止执行
+              }
             wx.navigateTo({
                 url: '/pages/booking/home/index',
                 complete() {}
@@ -86,6 +90,11 @@ Page({
      * 去选择场地页面
      */
     toFieldPage(e) {
+        // 预订页面
+        const app = getApp();
+        if (!app.globalData.checkLogin()) {
+            return; // 未登录则停止执行
+          }
         const {
             index
         } = e.currentTarget.dataset;

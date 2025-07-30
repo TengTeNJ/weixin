@@ -8,3 +8,14 @@
   /* padding: 200rpx 0; */
   box-sizing: border-box;
 } 
+
+button {
+    padding: 0 !important;
+    margin: 0;
+    border: none;          /* 关键：去除默认边框 */
+    background: none;      /* 关键：去除默认背景色 */
+    line-height: 1;
+  }
+  button::after {
+    display: none !important; /* 必须加 !important */
+}

@@ -55,10 +55,39 @@ function clearUserData() {
     getApp().globalData.token = '';
 }
 
+
+/**
+ * 检查登录状态
+ * @param {boolean} showModal 是否显示提示模态框
+ * @returns {boolean} 是否已登录
+ */
+function checkLogin(showModal = true) {
+  const token =getToken();
+  if (!token) {
+    if (showModal) {
+      wx.showModal({
+        title: '提示',
+        content: '请先进行授权登录',
+        showCancel: false,
+        success(res) {
+
+        }
+      });
+    }
+    return false;
+  }
+  return true;
+}
+
+module.exports = {
+  checkLogin
+};
+
 module.exports = {
     saveUserInfo,
     getUserInfo,
     saveToken,
     getToken,
-    clearUserData
+    clearUserData,
+    checkLogin
 };

@@ -104,16 +104,20 @@ Page({
     },
 
     // 初始化函数
-    onLoad(){
-     const userInfo = userUtils.getUserInfo();
-     console.error('userInfo',userInfo)
-     this.setData({
-        userInfo:userInfo
-     })
+    onLoad() {
+        const userInfo = userUtils.getUserInfo();
+        console.error('userInfo', userInfo)
+        this.setData({
+            userInfo: userInfo
+        })
     },
 
     // 点击头像
     onChooseAvatar(e) {
+        const app = getApp();
+        if(!app.globalData.checkLogin()){
+            return;
+        }
         const {
             avatarUrl
         } = e.detail // 头像临时路径
@@ -183,28 +187,37 @@ Page({
         console.error(index)
 
         if (index == 0) {
+            const token = userUtils.getToken();
+            if (!token) {
+                wx.showModal({
+                    title: '提示',
+                    content: '请先进行授权登录',
+                    showCancel: false
+                })
+                return;
+            }
             // 我的订单
             // 预订页面
             wx.navigateTo({
                 url: '/pages/booking/order/order',
                 complete() {}
             })
-        }else{
+        } else {
             wx.showToast({
                 title: '敬请期待',
                 icon: 'none'
-              })
+            })
         }
     },
 
-    toNextPage(e){
+    toNextPage(e) {
         const {
             index
         } = e.currentTarget.dataset // 获取传递的数据
         wx.showToast({
             title: '敬请期待',
             icon: 'none'
-          })
+        })
     }
 
 
