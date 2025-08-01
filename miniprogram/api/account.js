@@ -31,8 +31,7 @@ export default {
         }
     },
 
-    async weixinPhoneLogin(encryptedData,iv) {
-        console.warn('123');
+    async weixinPhoneLogin(encryptedData,iv,code) {
         try {
             const res = await this.getWxOpenId();
             console.warn('res123',res);
@@ -41,7 +40,8 @@ export default {
                 secretKey: sessionKey,
                 encryptedData,
                 iv,
-                openId
+                openId,
+                code
             });
         } catch (err) {
             return await http.post('/api/login/wxLoginByTel', {

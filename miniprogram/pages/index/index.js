@@ -1,5 +1,6 @@
-import pay from '../../api/pay';
 import field from '../../api/field'
+import userUtils from '../../utils/user'
+
 Page({
     data: {
         bannerList: [
@@ -35,7 +36,8 @@ Page({
     },
 
     async onLoad(option) {
-        this.getDayBestOfferData()
+        this.getDayBestOfferData();
+        // userUtils.clearUserData();
     },
 
     /**

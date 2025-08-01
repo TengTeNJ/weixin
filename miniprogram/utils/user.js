@@ -51,8 +51,8 @@ function getToken() {
 function clearUserData() {
     wx.removeStorageSync(USER_KEY);
     wx.removeStorageSync(TOKEN_KEY);
-    getApp().globalData.userInfo = null;
-    getApp().globalData.token = '';
+    getApp().globalData.userInfo && (getApp().globalData.userInfo = null);
+    getApp().globalData.token && (getApp().globalData.token = '');
 }
 
 
@@ -61,13 +61,13 @@ function clearUserData() {
  * @param {boolean} showModal 是否显示提示模态框
  * @returns {boolean} 是否已登录
  */
-function checkLogin(showModal = true) {
+function checkLogin(showModal = true,title) {
   const token =getToken();
   if (!token) {
     if (showModal) {
       wx.showModal({
         title: '提示',
-        content: '请先进行授权登录',
+        content: title || '请先进行授权登录',
         showCancel: false,
         success(res) {
 

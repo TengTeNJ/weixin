@@ -24,8 +24,6 @@ App({
         // })
         // 将检查登录方法挂载到全局
         this.globalData.checkLogin = checkLogin;
-        userUtils.clearUserData();
-
     },
     globalData: {
         userInfo: null,

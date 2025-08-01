@@ -45,6 +45,13 @@ Page({
         console.error('priceIds', priceIds)
         // 调用后台接口
         const res = await pay.weiChatPay(priceIds,fieldInfo.date);
+        if(!res.data){
+            // 不需要付钱
+            wx.navigateTo({
+                url: '/pages/booking/success/index'
+            })
+            return;
+        }
         const {
             timeStamp,
             nonceStr,

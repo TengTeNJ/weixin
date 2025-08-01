@@ -143,7 +143,8 @@ Page({
             });
             return;
         }
-        const result = await account.weixinPhoneLogin(encryptedData, iv);
+        console.error('code=',code)
+        const result = await account.weixinPhoneLogin(encryptedData, iv,code);
         this.setData({
             'userInfo.avatarUrl': result.data.avatar,
             'userInfo.nickName': result.data.nickName,
@@ -153,31 +154,7 @@ Page({
         userUtils.saveUserInfo(this.data.userInfo)
         // 获取token 并进行存储
         const token = result.data.memberToken;
-        userUtils.saveToken(token);
-        // 云函数的流程
-        // wx.cloud.callFunction({
-        //     name: 'getPhoneNumber',
-        //     data: {
-        //         code
-        //     },
-        //     success: res => {
-        //         console.error('success',res)
-        //         const phone = res.result.phoneNumber;
-        //         this.setData({
-        //             'userInfo.phoneNumber': phone
-        //         });
-        //         wx.showToast({
-        //             title: '手机号绑定成功'
-        //         });
-        //     },
-        //     fail: err => {
-        //         console.error('手机号获取失败', err);
-        //         wx.showToast({
-        //             title: '获取手机号失败',
-        //             icon: 'none'
-        //         });
-        //     }
-        // });
+        userUtils.saveToken(token);  
     },
 
     onClickGrid(e) {

@@ -39,7 +39,7 @@ Page({
             dateList.push({
                 week: label,
                 day: d.getDate(),
-                date: `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate()}`
+                date: `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`
             })
         }
         this.setData({
@@ -156,7 +156,7 @@ Page({
     },
 
     onBookNow() {
-        if (this.data.totalPrice === 0) {
+        if (this.data.selectDataList.length === 0) {
             wx.showToast({
                 title: '请选择时间段',
                 icon: 'none'
@@ -166,7 +166,7 @@ Page({
         // 序列化选中的数据 传输到下一个页面
         const encoded = encodeURIComponent(JSON.stringify(this.data.selectDataList));
 
-        wx.navigateTo({
+        wx.redirectTo({
             url: `/pages/booking/order/sendorder?data=${encoded}`
         })
     },
