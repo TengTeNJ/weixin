@@ -6,7 +6,9 @@
     "pages/booking/home/index",
     "pages/booking/order/sendorder",
     "pages/booking/success/index",
-    "pages/booking/order/order"
+    "pages/booking/order/order",
+    "pages/me/recharge/recharge",
+    "pages/me/recharge/rechargeSuccess"
   ],
   "window": {
     "navigationBarTitleText": "Potent",
@@ -32,8 +34,8 @@
         "selectedIconPath": "images/bottom/mine.png"
       }
     ],
-    "iconWidth": "40px",   
-    "spacing": "20px" 
+    "iconWidth": "40px",
+    "spacing": "20px"
   },
   "permission": {
     "scope.userInfo": {

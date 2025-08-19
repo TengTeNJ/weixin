@@ -2,6 +2,8 @@ import {
     http
 } from '../utils/request'
 
+import account from './account'
+
 import utils from '../utils/util'
 import userUtils from '../utils/user'
 import {STORAGE_KEYS} from '../utils/constants'
@@ -14,14 +16,10 @@ export default {
     /**
      * 支付接口
      */
-    async weiChatPay(priceIdList,bookDate) {
+    async weiChatPay(priceIdList,bookDate,total) {
         try {
             const ip = await utils.getLocalIP(); // 等待 IP 获取
             console.log('获取到 IP:', ip);
-
-            // 获取当前时间
-            // const formatDate = utils.getFormattedTime();
-            // console.log('当前时间:', formatDate);
 
             // 3. 获取 openid
             const wxOpenId = get(STORAGE_KEYS.OPENID);
@@ -31,14 +29,22 @@ export default {
             if (userInfo) {
                 phone = userInfo['phoneNumber'] || ''
             }
+            let payType = 0; // 支付类型(0微信支付，1余额支付, 2组合支付)
+            // 获取用户余额
+          let _userData = await account.getAccountData();
+          let usableMoney = _userData.usableMoney;
+          if(usableMoney >= total) payType = 1; // 余额支付
+          if( usableMoney > 0 && usableMoney < total){
+            payType = 2; // 组合支付
+          }
             // 请求接口，携带 ip 和时间支付请求
             return http.post('/api/pay/prepay', {
                 clientIp: ip,
                 bookDate: bookDate,
                 priceIdList,
                 wxOpenId,
-                'memberId': '1722478624',
                 'telephone' : phone,
+                payType
             }, {
                 'needToken': true
             });

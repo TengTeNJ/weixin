@@ -1,0 +1,98 @@
+.container {
+    background-color: #f6f6f6;
+    min-height: 100vh;
+  }
+  
+  .plans {
+      width: 100%;
+    padding: 20rpx 0; /* 这里不再加左右内边距 */
+  }
+  
+  .plan {
+    position: relative;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 30rpx 20rpx;
+    margin: 0 16rpx 20rpx; /* 左右 16rpx，底部 20rpx */
+    border-radius: 12rpx;
+    box-sizing: border-box;
+  }
+  
+  
+  .bonus-tag {
+    position: absolute;
+    top: 10rpx;
+    left: 10rpx;
+    background-color: #ff4d4f;
+    color: #fff;
+    font-size: 20rpx;
+    padding: 4rpx 12rpx;
+    border-radius: 8rpx;
+  }
+  
+  .left {
+    width: 80rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .coin-icon {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    background-color: #ffcc00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36rpx;
+  }
+  
+  .middle {
+    flex: 1;
+    margin-left: 20rpx;
+  }
+  
+  .title {
+    font-size: 30rpx;
+    font-weight: bold;
+  }
+  
+  .sub {
+    font-size: 24rpx;
+    color: #999;
+    margin-top: 4rpx;
+  }
+  
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .price {
+    font-size: 26rpx;
+    color: #ff6600;
+    margin-bottom: 12rpx;
+  }
+  
+  .pay-btn {
+    /* background-color: #4a90e2; */
+    color: #fff;
+    padding: 12rpx 28rpx;
+    border-radius: 8rpx;
+    font-size: 26rpx;
+    background-color: #f60;
+  }
+  
+  /* 自定义充值样式 */
+  .custom-input {
+    border: 1px solid #ddd;
+    border-radius: 8rpx;
+    padding: 16rpx 12rpx;
+    font-size: 26rpx;
+    width: 200rpx;
+  }
+  

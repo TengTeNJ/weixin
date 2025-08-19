@@ -1,0 +1,28 @@
+.container {
+    background-color: #fff;
+    min-height: 100vh;
+    padding: 40rpx;
+    text-align: center;
+  }
+  
+  .success-text {
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #07c160;
+    margin-top: 200rpx;
+  }
+  
+  .detail {
+    font-size: 30rpx;
+    margin-top: 20rpx;
+    color: #666;
+  }
+  
+  .back-btn {
+    margin-top: 60rpx;
+    background-color: #07c160;
+    color: #fff;
+    padding: 20rpx;
+    border-radius: 8rpx;
+  }
+  

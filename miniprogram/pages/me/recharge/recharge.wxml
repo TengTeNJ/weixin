@@ -1,0 +1,32 @@
+<view class="container">
+  <!-- 充值选项 -->
+  <view class="plans">
+    <view class="plan" wx:for="{{list}}" wx:key="id">
+      <view class="bonus-tag">送{{item.giftMoney}}元</view>
+      <view class="left">
+        <view class="coin-icon">💰</view>
+      </view>
+      <view class="middle">
+        <view class="title"> 到账 {{item.giftMoney + item.rechargeMoney}} 元 </view>
+        <view class="sub">{{item.confName}}</view>
+      </view>
+      <view class="right">
+        <view class="price">{{item.rechargeMoney}}元</view>
+        <view class="pay-btn" bindtap="selectPlan" data-id="{{item.id}}">立即充值</view>
+      </view>
+    </view>
+
+    <!-- 自定义充值 -->
+    <view class="plan custom">
+      <view class="left">
+        <view class="coin-icon">💰</view>
+      </view>
+      <view class="middle">
+        <input class="custom-input" type="number" placeholder="输入自定义金额" bindinput="onCustomInput" />
+      </view>
+      <view class="right">
+        <view class="pay-btn" bindtap="payCustom">自定义充值</view>
+      </view>
+    </view>
+  </view>
+</view>

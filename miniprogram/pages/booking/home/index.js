@@ -141,6 +141,7 @@ Page({
             console.log('数据已更新:', timeList[index].selected);
         });
         // const total = timeList.filter(i => i.selected).reduce((sum, item) => sum + item.periodPrice, 0)
+        this.data.totalPrice = parseFloat(this.data.totalPrice.toFixed(2));
         this.setData({
             timeList,
             totalPrice: this.data.totalPrice

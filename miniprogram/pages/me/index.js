@@ -7,7 +7,9 @@ Page({
             nickName: '',
             phoneNumber: '',
             balance: 100.00,
+            memberId: 0
         },
+        balance: 10,
         featureList: [{
                 icon: '/images/mine/order.png',
                 text: '我的订单'
@@ -110,6 +112,14 @@ Page({
         this.setData({
             userInfo: userInfo
         })
+        this.getAccountData();
+    },
+
+    async getAccountData(){
+        let _result = await account.getAccountData();
+        this.setData({
+            balance:   _result.data.usableMoney,
+        });
     },
 
     // 点击头像
@@ -157,12 +167,11 @@ Page({
         userUtils.saveToken(token);  
     },
 
-    onClickGrid(e) {
+   async  onClickGrid(e) {
         const {
             index
         } = e.currentTarget.dataset // 获取传递的数据
         console.error(index)
-
         if (index == 0) {
             const token = userUtils.getToken();
             if (!token) {
@@ -179,7 +188,22 @@ Page({
                 url: '/pages/booking/order/order',
                 complete() {}
             })
-        } else {
+        } else if(index == 1){
+            wx.navigateTo({
+                url: '/pages/me/recharge/recharge',
+                events:{
+                    refreshPage:() => {
+                        //TODO 充值完成后 重新调用接口 刷新页面
+                        wx.showToast({
+                            title: '充值成功',
+                            icon:'success'
+                          })
+                    }
+                },
+                complete() {
+                }
+            })
+        } else{
             wx.showToast({
                 title: '敬请期待',
                 icon: 'none'

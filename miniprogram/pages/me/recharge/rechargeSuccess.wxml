@@ -1,0 +1,6 @@
+<view class="container">
+  <view class="success-text">充值成功！</view>
+  <view class="detail">本次充值 {{amount}} 元，赠送 {{bonus}} 元</view>
+
+  <button class="back-btn" bindtap="goHome">返回首页</button>
+</view>

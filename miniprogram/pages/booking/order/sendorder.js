@@ -24,10 +24,12 @@ Page({
         const dataArray = JSON.parse(decodeURIComponent(dataParam));
         console.log('接收到的数组:', dataArray);
         // 计算总额
-        const total = dataArray.reduce((sum, item) => sum + item.periodPrice, 0);
+        let total = dataArray.reduce((sum, item) => sum + item.periodPrice, 0);
         console.log(total);
         // 获取手机号
         const phoneNumber = userUtils.getUserInfo().phoneNumber || '-';
+        total = parseFloat(total.toFixed(2));
+
         // 刷新页面
         this.setData({
             selectedTimes: dataArray,
@@ -44,7 +46,7 @@ Page({
             item.priceId));
         console.error('priceIds', priceIds)
         // 调用后台接口
-        const res = await pay.weiChatPay(priceIds,fieldInfo.date);
+        const res = await pay.weiChatPay(priceIds,fieldInfo.date,total);
         if(!res.data){
             // 不需要付钱
             wx.navigateTo({

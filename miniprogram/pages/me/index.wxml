@@ -35,7 +35,7 @@
     </view>
     <button wx:else open-type="getPhoneNumber" size="mini" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">授权登录</button>
   </view>
-  <view class="balance">余额 ￥{{userInfo.balance || '0.00'}}</view>
+  <view class="balance">余额 ￥{{balance}}</view>
 </view>
 
 <!-- 获取手机号隐藏按钮（必须用户点击触发）-->
