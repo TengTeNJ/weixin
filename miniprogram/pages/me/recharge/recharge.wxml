@@ -12,7 +12,7 @@
       </view>
       <view class="right">
         <view class="price">{{item.rechargeMoney}}元</view>
-        <view class="pay-btn" bindtap="selectPlan" data-id="{{item.id}}">立即充值</view>
+        <view class="pay-btn" bindtap="selectPlan" data-id="{{item.confId}}">立即充值</view>
       </view>
     </view>
 
@@ -22,7 +22,7 @@
         <view class="coin-icon">💰</view>
       </view>
       <view class="middle">
-        <input class="custom-input" type="number" placeholder="输入自定义金额" bindinput="onCustomInput" />
+        <input class="custom-input" type="digit" placeholder="输入自定义金额" bindinput="onCustomInput" />
       </view>
       <view class="right">
         <view class="pay-btn" bindtap="payCustom">自定义充值</view>

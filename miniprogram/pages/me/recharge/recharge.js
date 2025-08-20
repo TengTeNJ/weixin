@@ -35,17 +35,20 @@ Page({
   
     // 优惠列表充值
     async selectPlan(e) {
+        const _this = this;
       const id = e.currentTarget.dataset.id;
-      const plan = this.data.list.find(p => p.id === id);
+      const plan = this.data.list.find(p => p.confId === id);
+      console.error('id=',id)
       if (!plan) return;
       let _result = await recharge.prepayForRecharge(plan.confId,plan.rechargeMoney)
+      console.error('_result=',_result)
       wx.requestPayment({
         ..._result.data,
         success(res) {
             console.log('支付成功',res)
-            wx.navigateBack();
-            const eventChannel = this.getOpenerEventChannel();
+            const eventChannel = _this.getOpenerEventChannel();
             eventChannel.emit('refreshPage');
+            wx.navigateBack();
         },
         fail(error) {
             console.error('error',error)

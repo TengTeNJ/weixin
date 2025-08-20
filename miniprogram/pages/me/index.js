@@ -9,7 +9,7 @@ Page({
             balance: 100.00,
             memberId: 0
         },
-        balance: 10,
+        balance: 0.0,
         featureList: [{
                 icon: '/images/mine/order.png',
                 text: '我的订单'
@@ -112,6 +112,9 @@ Page({
         this.setData({
             userInfo: userInfo
         })
+    },
+
+    onShow(){
         this.getAccountData();
     },
 
@@ -168,6 +171,7 @@ Page({
     },
 
    async  onClickGrid(e) {
+       const _this = this;
         const {
             index
         } = e.currentTarget.dataset // 获取传递的数据
@@ -198,6 +202,10 @@ Page({
                             title: '充值成功',
                             icon:'success'
                           })
+                        setTimeout(() => {
+                            // 刷新余额数据
+                            _this.getAccountData();
+                        }, 1500);
                     }
                 },
                 complete() {
