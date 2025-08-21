@@ -69,7 +69,7 @@ Page({
     /**拨打电话 */
     async callPhone() {
         wx.makePhoneCall({
-            phoneNumber: '0513-81185608'
+            phoneNumber: '18094391931'
         })
     },
 

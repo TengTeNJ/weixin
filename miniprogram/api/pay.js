@@ -6,8 +6,12 @@ import account from './account'
 
 import utils from '../utils/util'
 import userUtils from '../utils/user'
-import {STORAGE_KEYS} from '../utils/constants'
-import {get} from '../utils/storage'
+import {
+    STORAGE_KEYS
+} from '../utils/constants'
+import {
+    get
+} from '../utils/storage'
 
 /**
  * 支付相关API
@@ -16,11 +20,10 @@ export default {
     /**
      * 支付接口
      */
-    async weiChatPay(priceIdList,bookDate,total) {
+    async weiChatPay(priceIdList, bookDate, total) {
         try {
             const ip = await utils.getLocalIP(); // 等待 IP 获取
             console.log('获取到 IP:', ip);
- console.error('total=',total)
             // 3. 获取 openid
             const wxOpenId = get(STORAGE_KEYS.OPENID);
             // 获取手机号
@@ -31,22 +34,19 @@ export default {
             }
             let payType = 0; // 支付类型(0微信支付，1余额支付, 2组合支付)
             // 获取用户余额
-          let _userData = await account.getAccountData();
-          let usableMoney = _userData.data.usableMoney;
-          console.error('usableMoney',usableMoney)
-          console.error('_userData',_userData)
-
-          if(usableMoney >= total) payType = 1; // 余额支付
-          if( usableMoney > 0 && usableMoney < total){
-            payType = 2; // 组合支付
-          }
+            let _userData = await account.getAccountData();
+            let usableMoney = _userData.data.usableMoney;
+            if (usableMoney >= total) payType = 1; // 余额支付
+            if (usableMoney > 0 && usableMoney < total) {
+                payType = 2; // 组合支付
+            }
             // 请求接口，携带 ip 和时间支付请求
             return http.post('/api/pay/prepay', {
                 clientIp: ip,
                 bookDate: bookDate,
                 priceIdList,
                 wxOpenId,
-                'telephone' : phone,
+                'telephone': phone,
                 payType
             }, {
                 'needToken': true
