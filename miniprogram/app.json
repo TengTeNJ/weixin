@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/home/index",
     "pages/index/index",
     "pages/scan/index",
     "pages/me/index",
@@ -8,7 +9,8 @@
     "pages/booking/success/index",
     "pages/booking/order/order",
     "pages/me/recharge/recharge",
-    "pages/me/recharge/rechargeSuccess"
+    "pages/me/recharge/rechargeSuccess",
+    "pages/stores/stores"
   ],
   "window": {
     "navigationBarTitleText": "Potent",
@@ -22,7 +24,7 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/home/index",
         "text": "首页",
         "iconPath": "images/bottom/home-no.png",
         "selectedIconPath": "images/bottom/home.png"

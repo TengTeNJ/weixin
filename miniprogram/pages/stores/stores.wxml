@@ -1,0 +1,40 @@
+<view class="venue-page">
+
+<!-- 顶部筛选栏 -->
+<view class="filter-bar">
+  <picker mode="selector" range="{{cities}}" bindchange="onCityChange">
+    <view class="filter-item">
+     <view class="city-name">{{selectedCity}}</view>
+      <view class="triangle-down"></view>
+    </view>
+  </picker>
+
+  <view class="filter-item sort" bindtap="toggleSort">
+    按距离
+    <view class="sort-icons">
+      <view class="triangle-up {{sortOrder === 'asc' ? 'active' : ''}}"></view>
+      <view class="triangle-down {{sortOrder === 'desc' ? 'active' : ''}}"></view>
+    </view>
+  </view>
+</view>
+
+<!-- 场馆列表 -->
+<scroll-view scroll-y class="venue-list">
+  <block wx:for="{{venueList}}" wx:key="index">
+    <view class="venue-card">
+      <image class="venue-img" src="{{item.imageUrl}}" mode="aspectFill"></image>
+      <view class="venue-info">
+        <view class="info-top">
+          <text class="venue-name">{{item.name}}</text>
+          <view class="distance">
+            <image src="/images/home/map.png" class="location-icon"></image>
+            <text>距您{{item.distance}}km</text>
+          </view>
+        </view>
+        <view class="venue-address">{{item.address}}</view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+
+</view>
