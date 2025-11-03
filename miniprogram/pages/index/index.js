@@ -1,5 +1,4 @@
 import field from '../../api/field'
-import userUtils from '../../utils/user'
 
 Page({
     data: {

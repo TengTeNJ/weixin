@@ -2,7 +2,7 @@
 
 <!-- 顶部筛选栏 -->
 <view class="filter-bar">
-  <picker mode="selector" range="{{cities}}" bindchange="onCityChange">
+  <picker mode="selector" range-key="name" range range="{{cities}}" bindchange="onCityChange">
     <view class="filter-item">
      <view class="city-name">{{selectedCity}}</view>
       <view class="triangle-down"></view>
@@ -28,7 +28,7 @@
           <text class="venue-name">{{item.name}}</text>
           <view class="distance">
             <image src="/images/home/map.png" class="location-icon"></image>
-            <text>距您{{item.distance}}km</text>
+            <text>距您{{item.distance}}</text>
           </view>
         </view>
         <view class="venue-address">{{item.address}}</view>

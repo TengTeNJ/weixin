@@ -12,7 +12,7 @@
 <!-- 场馆图片（带右上角距离badge）-->
 <view class="venue-card" bindtap="goToVenueDetail">
   <image class="venue-img" src="{{venue.image}}" mode="aspectFill" />
-  <view class="venue-distance">{{venue.distance}} km</view>
+  <view class="venue-distance">{{venue.distance}}</view>
 </view>
 
 <!-- 场馆信息行：地图icon + 名称 + 状态 -->

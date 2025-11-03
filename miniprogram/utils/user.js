@@ -70,7 +70,6 @@ function checkLogin(showModal = true,title) {
         content: title || '请先进行授权登录',
         showCancel: false,
         success(res) {
-
         }
       });
     }

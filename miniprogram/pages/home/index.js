@@ -1,5 +1,6 @@
 import account from '../../api/account'
 import userUtils from '../../utils/user'
+import stores from '../../api/stores'
 Page({
     data: {
         userInfo: {
@@ -10,9 +11,16 @@ Page({
             memberId: 0
         },
         venue: {
-            name: "腾特智能AR训练馆上海静安店",
-            status: "营业中",
-            distance: 12.9,
+            address: "",
+            contact: "",
+            distance: "261.35km",
+            distanceValue: 261350,
+            id: 6,
+            latitude: 31.188819,
+            longitude: 121.44343,
+            name: "腾特AR训练馆上海店",
+            remark: null,
+            tel: "",
             image: "/images/home/banner2.png"
         },
         user: {
@@ -24,11 +32,31 @@ Page({
     },
 
     // 初始化函数
-    onLoad() {
+    async onLoad() {
+        const _this =  this;
         const userInfo = userUtils.getUserInfo();
         console.error('userInfo', userInfo)
         this.setData({
             userInfo: userInfo
+        })
+        wx.getLocation({
+            type: 'gcj02', // 返回可以用于wx.openLocation的坐标
+            async success(res) {
+                console.log("经度：", res.longitude)
+                console.log("纬度：", res.latitude)
+                const storesData = await stores.getStoreList(res.longitude, res.latitude);
+                if (Array.isArray(storesData) && storesData.length > 0)
+                _this.setData({
+                        venue: {
+                            ...storesData[0],
+                            image:'/images/home/banner2.png'
+                        },
+                    })
+                console.error('cities=', storesData)
+            },
+            fail(err) {
+                console.error("获取位置失败：", err)
+            }
         })
     },
 
