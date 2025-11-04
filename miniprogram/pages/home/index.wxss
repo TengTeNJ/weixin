@@ -277,7 +277,6 @@
     margin-right: 12rpx;
 }
 
-
 .header-text {
     font-size: 24rpx;
 }
