@@ -9,7 +9,7 @@ Page({
             longitude: 121,
             provinceCode: "320000"
         }],
-        selectedCity: '南通',
+        selectedCity: '南通市',
         sortOrder: 'asc', // asc: 由近到远, desc: 由远到近
         venueList: [
             // {
@@ -37,21 +37,25 @@ Page({
         const res = await stores.getCityList();
         console.error('res111=', res);
         this.setData({
-            cities:res
+            cities: res
         });
-        this.getStoreList();
+        if (Array.isArray(res) && res.length > 0) {
+            const city = res[0];
+            // 请求门店列表
+            this.getStoreList(city.code);
+        }
     },
 
     // 请求门店列表
-    async getStoreList(cityCode,sortOrder){
+    async getStoreList(cityCode, sortOrder) {
         const _this = this;
         wx.getLocation({
             type: 'gcj02', // 返回可以用于wx.openLocation的坐标
             async success(res) {
-                const storesData = await stores.getStoreList(res.longitude, res.latitude,sortOrder,cityCode);
+                const storesData = await stores.getStoreList(res.longitude, res.latitude, sortOrder, cityCode);
                 if (Array.isArray(storesData) && storesData.length > 0)
-                _this.setData({
-                    venueList: storesData,
+                    _this.setData({
+                        venueList: storesData,
                     })
                 console.error('cities=', storesData)
             },
@@ -60,15 +64,15 @@ Page({
             }
         })
     },
-
+    // 城市切换
     onCityChange(e) {
         const index = e.detail.value
         this.setData({
-            selectedCity: this.data.cities[index]
+            selectedCity: this.data.cities[index].name
         });
-        const city = thi.data.cities[index];
+        const city = this.data.cities[index];
         const asc = this.data.sortOrder == 'asc' ? 1 : 2;
-        this.getStoreList(city.code,asc);
+        this.getStoreList(city.code, asc);
     },
 
     toggleSort() {

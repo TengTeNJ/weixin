@@ -76,7 +76,6 @@
 .venue-name {
     font-size: 28rpx;
     color: #222;
-    flex: 1;
 }
 
 .venue-status {
@@ -165,6 +164,12 @@
     height: 200rpx;
     margin-bottom: 16rpx;
 }
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;      /* 确保图片也是圆形 */
+  }
 
 .feature-title {
     margin-top: 70rpx;
@@ -263,6 +268,13 @@
     font-weight: 300;
     font-size: 20rpx;
     color: #181818;
+    display: flex;
+}
+
+.phone-image{
+    width: 20rpx;
+    height: 26rpx;
+    margin-right: 12rpx;
 }
 
 
@@ -296,10 +308,23 @@
 .top-right {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12rpx;
 }
 
 .balance {
     color: #E96415;
     font-weight: 400;
     font-size: 20rpx;
+}
+
+.text-div{
+    display: flex;
+    align-items: center;
+}
+
+.text-image{
+    margin-left: 12rpx;
+    width: 32rpx;
+    height: 16rpx;
 }

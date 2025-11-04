@@ -1,82 +1,82 @@
 <view class="home-container">
 
-<!-- 标题栏： 左标题 + 右查看更多 -->
-<view class="title-row">
-  <text class="title-left">附近的场馆</text>
-  <view class="title-right" bindtap="goToVenueList">
-    <text class="more-text">查看更多</text>
-    <image src="/images/home/route.png" class="more-icon" />
-  </view>
-</view>
-
-<!-- 场馆图片（带右上角距离badge）-->
-<view class="venue-card" bindtap="goToVenueDetail">
-  <image class="venue-img" src="{{venue.image}}" mode="aspectFill" />
-  <view class="venue-distance">{{venue.distance}}</view>
-</view>
-
-<!-- 场馆信息行：地图icon + 名称 + 状态 -->
-<view class="venue-info-row">
-  <image class="map-icon" src="/images/home/map.png" />
-  <text class="venue-name">{{venue.name}}</text>
-  <text class="venue-status">{{venue.status}}</text>
-</view>
-
-<!-- 用户信息卡 -->
-<!-- 头像 + 用户信息 -->
-<view class="user-info">
-<!--头像-->
-<button 
-  open-type="chooseAvatar" 
-  bindchooseavatar="onChooseAvatar"
-  class="circle-avatar-button"
->
-  <image wx:if="{{userInfo.avatarUrl}}" src="{{userInfo.avatarUrl}}" class="avatar-image"></image>
-  <text wx:else class="header-text">设置头像</text>
-</button>
-
-  <!-- <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}"></image> -->
-  <view class="user-text">
-  <view class="top-right">
-    <view class="nickname">{{userInfo.nickName || '未登录'}}</view>
-    <view class="balance">余额 ￥{{balance}}</view>
-  </view>
-   <!--手机号-->
-    <view wx:if="{{userInfo.phoneNumber}}" class="phone">
-      {{userInfo.phoneNumber ?  userInfo.phoneNumber : '未绑定手机号'}}
+    <!-- 标题栏： 左标题 + 右查看更多 -->
+    <view class="title-row">
+        <text class="title-left">附近的场馆</text>
+        <view class="title-right" bindtap="goToVenueList">
+            <text class="more-text">查看更多</text>
+            <image src="/images/home/route.png" class="more-icon" />
+        </view>
     </view>
-    <button wx:else open-type="getPhoneNumber" size="mini" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">授权登录</button>
-  </view>
-</view>
 
-<!-- 四大功能区： 左大立即订场 + 右竖排2个（充值 / 团课） -->
-<view class="feature-row">
-  <view class="feature-left" bindtap="goToBooking">
-    <text class="feature-title">立即订场</text>
-    <image class="feature-icon" src="/images/home/book.png" />
-  </view>
-
-  <view class="feature-right">
-    <view class="feature-top" bindtap="goToRecharge">
-      <text class="small-title">会员\n充值</text>
-      <image class="small-icon" src="/images/home/charge.png" />
+    <!-- 场馆图片（带右上角距离badge）-->
+    <view class="venue-card" bindtap="goToVenueDetail">
+        <image class="venue-img" src="{{venue.image}}" mode="aspectFill" />
+        <view class="venue-distance">{{venue.distance}}</view>
     </view>
-    <view class="feature-bottom" bindtap="goToGroupLesson">
-      <text class="small-title">团课\n活动</text>
-      <image class="small-icon" src="/images/home/group.png" />
-    </view>
-  </view>
-</view>
 
-<!-- 私教预定行：左文案 + 右两个头像 -->
-<view class="private-row">
-  <view class="private-left" bindtap="goToPrivateCoach">
-    <text class="private-text">私教课预订</text>
-  </view>
-  <view class="private-right">
-    <image class="coach-avatar" src="/images/home/head2.png" />
-    <image class="coach-avatar" src="/images/home/head1.png" />
-  </view>
-</view>
+    <!-- 场馆信息行：地图icon + 名称 + 状态 -->
+    <view class="venue-info-row">
+        <image class="map-icon" src="/images/home/map.png" />
+        <text class="venue-name">{{venue.name}}</text>
+        <text class="venue-status">{{venue.status}}</text>
+    </view>
+
+    <!-- 用户信息卡 -->
+    <!-- 头像 + 用户信息 -->
+    <view class="user-info">
+        <!--头像-->
+        <button open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" class="circle-avatar-button">
+            <image wx:if="{{userInfo.avatarUrl}}" src="{{userInfo.avatarUrl}}" class="avatar-image"></image>
+            <text wx:else class="header-text">设置头像</text>
+        </button>
+
+        <!-- <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}"></image> -->
+        <view class="user-text">
+            <view class="top-right">
+                <view class="text-div">
+                    <view class="nickname">{{userInfo.nickName || '未登录'}}</view>
+                    <image wx:if="{{userInfo.nickName && balance > 0}}" src="/images/home/vip.png" class="text-image" mode="aspectFit"></image>
+                </view>
+                <view class="balance">余额 ￥{{balance}}</view>
+            </view>
+            <!--手机号-->
+            <view wx:if="{{userInfo.phoneNumber}}" class="phone">
+                <image src="/images/home/phone.png" class="phone-image" mode="aspectFit"></image>
+                <view> {{userInfo.phoneNumber ?  userInfo.phoneNumber : '未绑定手机号'}}</view>
+            </view>
+            <button wx:else open-type="getPhoneNumber" size="mini" bindgetphonenumber="onGetPhoneNumber" class="hidden-btn">授权登录</button>
+        </view>
+    </view>
+
+    <!-- 四大功能区： 左大立即订场 + 右竖排2个（充值 / 团课） -->
+    <view class="feature-row">
+        <view class="feature-left" bindtap="goToBooking">
+            <text class="feature-title">立即订场</text>
+            <image class="feature-icon" src="/images/home/book.png" />
+        </view>
+
+        <view class="feature-right">
+            <view class="feature-top" bindtap="goToRecharge">
+                <text class="small-title">会员\n充值</text>
+                <image class="small-icon" src="/images/home/charge.png" />
+            </view>
+            <view class="feature-bottom" bindtap="goToGroupLesson">
+                <text class="small-title">团课\n活动</text>
+                <image class="small-icon" src="/images/home/group.png" />
+            </view>
+        </view>
+    </view>
+
+    <!-- 私教预定行：左文案 + 右两个头像 -->
+    <view class="private-row">
+        <view class="private-left" bindtap="goToPrivateCoach">
+            <text class="private-text">私教课预订</text>
+        </view>
+        <view class="private-right">
+            <image class="coach-avatar" src="/images/home/head2.png" />
+            <image class="coach-avatar" src="/images/home/head1.png" />
+        </view>
+    </view>
 
 </view>

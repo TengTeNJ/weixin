@@ -19,7 +19,6 @@ export function request(options) {
         'Content-Type': 'application/json'
     };
     const needToken = options['needToken'] || false
-    console.error('needToken', options['needToken'])
     // ✅ 仅当 token 存在时才加 Authorization 字段
     if (token && needToken) {
         headers['X-Badminton-Book-Api-Token'] = `${token}`;
