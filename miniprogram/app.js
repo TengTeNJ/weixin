@@ -28,6 +28,7 @@ App({
     globalData: {
         userInfo: null,
         token: '',
-        checkLogin: null
+        checkLogin: null,
+        storeId:null
     }
 })

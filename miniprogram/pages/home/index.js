@@ -39,6 +39,7 @@ Page({
         this.setData({
             userInfo: userInfo
         })
+        // 获取位置信息 请求
         wx.getLocation({
             type: 'gcj02', // 返回可以用于wx.openLocation的坐标
             async success(res) {
@@ -53,11 +54,12 @@ Page({
                         },
                     })
                 console.error('cities=', storesData)
+                getApp().globalData.storeId = storesData[0].id;
             },
             fail(err) {
                 console.error("获取位置失败：", err)
             }
-        })
+        });
     },
 
     onShow() {
@@ -115,10 +117,21 @@ Page({
         const token = result.data.memberToken;
         userUtils.saveToken(token);
     },
-    /* 导航方法 */
+    /* 去门店列表 */
     goToVenueList() {
+        const _this = this;
         wx.navigateTo({
-            url: '/pages/stores/stores'
+            url: '/pages/stores/stores',
+            success(res){
+                const eventChannel = res.eventChannel; // 获取事件通道
+                eventChannel.on('item', (data) => {
+                  console.log(data); // 输出从页面B传递过来的数据
+                  _this.setData({
+                      venue:data
+                  })
+                  getApp().globalData.storeId = data.id;
+                });
+            }
         });
     },
 
@@ -141,7 +154,7 @@ Page({
             return; // 未登录则停止执行
         }
         wx.navigateTo({
-            url: '/pages/booking/home/index',
+            url: `/pages/booking/home/index?storeId=${this.data.venue.id}`,
         })
     },
 
@@ -152,7 +165,8 @@ Page({
             return; // 未登录则停止执行
         }
         wx.navigateTo({
-            url: '/pages/me/recharge/recharge',
+            url: `/pages/coupons/home?storeId=${this.data.venue.id}`,
+            // url: '/pages/me/recharge/recharge',
             events: {
                 refreshPage: () => {
                     //TODO 充值完成后 重新调用接口 刷新页面

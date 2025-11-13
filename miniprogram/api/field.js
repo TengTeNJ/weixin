@@ -8,8 +8,8 @@ export default {
    * 获取场地价格列表
    * @param {日期} bookDate 
    */
-  getFieldPriceList(bookDate) {
-    return http.get('/api/fieldInfo/getFieldInfoPriceList',{bookDate},{'needToken':false});
+  getFieldPriceList(bookDate,storeId) {
+    return http.get('/api/fieldInfo/getFieldInfoPriceList',{bookDate,storeId},{'needToken':false});
   },
 
   /**

@@ -45,7 +45,6 @@
             </view>
         </block>
     </view>
-
     <!-- 下方列表入口 -->
     <view class="list-container">
         <block wx:for="{{listItems}}" wx:key="index">

@@ -35,7 +35,7 @@ Page({
   
     // 优惠列表充值
     async selectPlan(e) {
-        const _this = this;
+      const _this = this;
       const id = e.currentTarget.dataset.id;
       const plan = this.data.list.find(p => p.confId === id);
       console.error('id=',id)

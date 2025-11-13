@@ -24,6 +24,8 @@ export default {
     const clientIp = await utils.getLocalIP(); // 等待 IP 获取
     console.log('获取到 IP:', clientIp);
 
+    console.error('getApp().globalData.storeId',getApp().globalData.storeId);
+
     // 获取 openid
     const wxOpenId = get(STORAGE_KEYS.OPENID);
       return http.post('/api/pay/prepayForRecharge',{clientIp,rechargeConfId,rechargeMoney,wxOpenId},{'needToken':true});

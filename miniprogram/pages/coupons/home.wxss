@@ -1,0 +1,207 @@
+.page {
+    box-sizing: border-box;
+    background: #f8f8f8;
+    width: 100%;
+    height: 100vh; /* 页面高度 */
+  }
+  
+  /* 顶部筛选栏 */
+  .filter-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 32rpx;
+    margin-bottom: 30rpx;
+    background-color: white;/* ✅ 顶部与列表间距 */
+  }
+  
+  .filter-left {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 24rpx;
+  }
+  
+  .arrow-down {
+    width: 24rpx;
+    height: 24rpx;
+    margin-left: 10rpx;
+  }
+  
+  .divider {
+    width: 1rpx;
+    height: 30rpx;
+    background: #ccc;
+    margin: 0 20rpx;
+  }
+  
+  .filter-right {
+    display: flex;
+    gap: 20rpx;
+  }
+  
+  .tag {
+    padding: 10rpx 24rpx;
+    border-radius: 30rpx;
+    background: #eee;
+    color:rgba(24, 24, 24, 1);
+    font-size: 22rpx;
+  }
+  
+  .tag.active {
+    background:rgba(233, 100, 21, 0.18);
+    color:rgba(233, 100, 21, 1);
+    font-weight: bold;
+  }
+  
+  /* 卡片列表 */
+  .card-list {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40rpx; /* ✅ 底部留白，避免贴边 */
+  }
+  
+  .card-item {
+    border-radius: 20rpx;
+    padding: 32rpx; /* ✅ 卡片内部间距 */
+    margin:24rpx 32rpx ;
+    color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 6rpx 10rpx rgba(0,0,0,0.1);
+  }
+
+  .card-item:first-child {
+    margin-top: 0;
+  }
+  
+  /* 顶部信息 */
+  .card-top {
+    margin-bottom: 20rpx;
+  }
+  
+  .card-title {
+    font-size: 32rpx;
+    font-weight: bold;
+  }
+  
+  .card-value {
+    font-size: 26rpx;
+    margin-top: 8rpx;
+  }
+  
+  /* 中间信息 */
+  .card-middle {
+    font-size: 22rpx;
+    margin: 44rpx auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6rpx;
+  }
+  
+  /* 分割线 */
+  .line {
+    height: 1rpx;
+    background: rgba(232,200,170,1);
+    margin: 20rpx 0;
+  }
+  
+  /* 底部信息 */
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .price-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24rpx;
+  }
+  
+  .price {
+    font-size: 34rpx;
+    font-weight: bold;
+  }
+  
+  .origin {
+    font-size: 24rpx;
+    opacity: 0.8;
+  }
+  
+  .arrow {
+    height: 36rpx;
+    width: 36rpx;
+  }
+  
+  .card-extra {
+    margin-top: 20rpx;
+    font-size: 24rpx;
+    opacity: 0.9;
+  }
+  
+  /* 弹窗遮罩 */
+  .popup-mask {
+    position: fixed;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3);
+  }
+  
+  /* 弹窗主体 */
+  .popup {
+    position: fixed;
+    bottom: 0; left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 20rpx 20rpx 0 0;
+    padding: 20rpx 0 60rpx 0;
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .popup-item {
+    text-align: center;
+    font-size: 30rpx;
+    padding: 24rpx 0;
+    border-bottom: 1rpx solid #eee;
+  }
+  
+  /* 取消按钮显式样式（更明显） */
+.popup-cancel {
+    margin-top: 12rpx;
+    text-align: center;
+    font-size: 30rpx;
+    padding: 20rpx 0;
+    /* background: #fafafa; */
+    border-radius: 12rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
+    color: #333;
+    /* box-shadow: 0 1rpx 0 rgba(0,0,0,0.03) inset; */
+  }
+
+  .card-item-gradient{
+    background: linear-gradient(to right, #9B9B9B, #0C0702);
+  } 
+
+  .origin-text {
+    text-decoration: line-through;
+    color:white; /* 可以调整颜色 */
+  }
+
+  .triangle {
+    font-size: 20rpx;
+    color:rgba(24, 24, 24, 1);
+    margin-left: 6rpx;
+}
+  
+  /* 弹出动画 */
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  

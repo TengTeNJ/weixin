@@ -10,7 +10,9 @@
     "pages/booking/order/order",
     "pages/me/recharge/recharge",
     "pages/me/recharge/rechargeSuccess",
-    "pages/stores/stores"
+    "pages/stores/stores",
+    "pages/coupons/home",
+    "pages/me/video/video"
   ],
   "window": {
     "navigationBarTitleText": "Potent",
@@ -44,10 +46,10 @@
       "desc": "用于显示用户头像与昵称"
     },
     "scope.userLocation": {
-        "desc": "你的位置信息将用于获取当前城市"
-      }
+      "desc": "你的位置信息将用于获取当前城市"
+    }
   },
   "requiredPrivateInfos": [
-       "getLocation"
+    "getLocation"
   ]
 }

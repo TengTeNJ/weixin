@@ -21,7 +21,7 @@
 <!-- 场馆列表 -->
 <scroll-view scroll-y class="venue-list">
   <block wx:for="{{venueList}}" wx:key="index">
-    <view class="venue-card">
+    <view class="venue-card" data-item="{{item}}" bind:tap="selectStore">
       <image class="venue-img" src="{{item.imageUrl}}" mode="aspectFill"></image>
       <view class="venue-info">
         <view class="info-top">

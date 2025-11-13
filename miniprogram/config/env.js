@@ -3,9 +3,9 @@
  * 切换环境只需修改 currentEnv 的值
  */
 const envConfig = {
-    // 开发环境
+    // 开发环境 http://13.49.0.47:91 
     development: {
-      baseUrl: 'http://13.49.0.47:91'
+      baseUrl: ' http://1.13.0.226:8891'
     },
     // 测试环境
     test: {

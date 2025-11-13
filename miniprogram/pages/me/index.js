@@ -20,27 +20,11 @@ Page({
             },
             {
                 icon: '/images/mine/tennis.png',
-                text: '网球赛事'
+                text: '我的卡券'
             },
             {
                 icon: '/images/mine/study.png',
-                text: '研学活动'
-            },
-            {
-                icon: '/images/mine/data.png',
-                text: '训练数据'
-            },
-            {
-                icon: '/images/mine/record.png',
-                text: '个人记录'
-            },
-            {
-                icon: '/images/mine/rank.png',
-                text: '排行榜'
-            },
-            {
-                icon: '/images/mine/match.png',
-                text: '我的比赛'
+                text: '场馆指引'
             },
         ],
         listItems: [{
@@ -48,8 +32,8 @@ Page({
                 title: '消费记录'
             },
             {
-                icon: '/images/mine/coupon.png',
-                title: '优惠券'
+                icon: '/images/mine/phone.png',
+                title: '合作加盟'
             },
             {
                 icon: '/images/mine/message.png',
@@ -59,11 +43,7 @@ Page({
                 icon: '/images/mine/notice.png',
                 title: '场馆须知'
             },
-            {
-                icon: '/images/mine/help.png',
-                title: '帮助中心'
-            },
-        ]
+        ],
     },
     onUserTap() {
         const _this = this;
@@ -114,21 +94,21 @@ Page({
         })
     },
 
-    onShow(){
+    onShow() {
         this.getAccountData();
     },
 
-    async getAccountData(){
+    async getAccountData() {
         let _result = await account.getAccountData();
         this.setData({
-            balance:   _result.data.usableMoney,
+            balance: _result.data.usableMoney,
         });
     },
 
     // 点击头像
     onChooseAvatar(e) {
         const app = getApp();
-        if(!app.globalData.checkLogin()){
+        if (!app.globalData.checkLogin()) {
             return;
         }
         const {
@@ -156,8 +136,8 @@ Page({
             });
             return;
         }
-        console.error('code=',code)
-        const result = await account.weixinPhoneLogin(encryptedData, iv,code);
+        console.error('code=', code)
+        const result = await account.weixinPhoneLogin(encryptedData, iv, code);
         this.setData({
             'userInfo.avatarUrl': result.data.avatar,
             'userInfo.nickName': result.data.nickName,
@@ -167,51 +147,55 @@ Page({
         userUtils.saveUserInfo(this.data.userInfo)
         // 获取token 并进行存储
         const token = result.data.memberToken;
-        userUtils.saveToken(token);  
+        userUtils.saveToken(token);
     },
 
-   async  onClickGrid(e) {
-       const _this = this;
+    async onClickGrid(e) {
+        const token = userUtils.getToken();
+        if (!token) {
+            wx.showModal({
+                title: '提示',
+                content: '请先进行授权登录',
+                showCancel: false
+            })
+            return;
+        }
+        const _this = this;
         const {
             index
         } = e.currentTarget.dataset // 获取传递的数据
         console.error(index)
+
         if (index == 0) {
-            const token = userUtils.getToken();
-            if (!token) {
-                wx.showModal({
-                    title: '提示',
-                    content: '请先进行授权登录',
-                    showCancel: false
-                })
-                return;
-            }
             // 我的订单
             // 预订页面
             wx.navigateTo({
                 url: '/pages/booking/order/order',
                 complete() {}
             })
-        } else if(index == 1){
+        } else if (index == 1) {
             wx.navigateTo({
                 url: '/pages/me/recharge/recharge',
-                events:{
-                    refreshPage:() => {
+                events: {
+                    refreshPage: () => {
                         //TODO 充值完成后 重新调用接口 刷新页面
                         wx.showToast({
                             title: '充值成功',
-                            icon:'success'
-                          })
+                            icon: 'success'
+                        })
                         setTimeout(() => {
                             // 刷新余额数据
                             _this.getAccountData();
                         }, 1500);
                     }
                 },
-                complete() {
-                }
+                complete() {}
             })
-        } else{
+        } else if (index === 3) {
+            wx.navigateTo({
+                url: '/pages/me/video/video?url=' + encodeURIComponent('https://weixin-1368395492.cos.ap-nanjing.myqcloud.com/video/guide.mp4')
+            })
+        } else {
             wx.showToast({
                 title: '敬请期待',
                 icon: 'none'
@@ -227,7 +211,5 @@ Page({
             title: '敬请期待',
             icon: 'none'
         })
-    }
-
-
+    },
 })

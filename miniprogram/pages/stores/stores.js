@@ -32,6 +32,19 @@ Page({
         this.getStoreCode();
     },
 
+    // 切换门店
+    selectStore(e) {
+        const _this = this;
+        console.error('e.currentTarget.dataset', e.currentTarget.dataset)
+        const {
+            item
+        } = e.currentTarget.dataset
+        // 在页面B的代码中
+        const eventChannel = this.getOpenerEventChannel(); // 获取事件通道
+        eventChannel.emit('item', item); // 发送数据给页面A
+        wx.navigateBack();
+    },
+
     // 请求城市列表
     async getStoreCode() {
         const res = await stores.getCityList();

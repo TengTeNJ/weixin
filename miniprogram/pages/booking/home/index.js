@@ -47,6 +47,9 @@ Page({
         })
 
         const fieldIndex = options.fieldIndex;
+        const storeId = options.storeId;// 商铺id
+        this.storeId = storeId;
+
         if (fieldIndex != undefined) {
             // 传递过来的参数是字符串类型，所以必须要转换成fieldIndex，要不然类型不一样可能会有问题，比如我们发现不刷新页面
             // 因为wxml中用了精准比较selectedDateIndex === index，所以类型不一样就不认为一样了
@@ -184,7 +187,7 @@ Page({
             const dateObject = this.data.dateList[this.data.selectedDateIndex];
             const bookDate = dateObject.date;
             // 调用API获取数据
-            const result = await fieldApi.getFieldPriceList(bookDate);
+            const result = await fieldApi.getFieldPriceList(bookDate,this.storeId);
             // 处理返回的场地数据
             this.setData({
                 fieldList: result.data || [],

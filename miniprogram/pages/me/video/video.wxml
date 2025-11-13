@@ -1,0 +1,12 @@
+<view class="video-container">
+  <video
+    src="{{videoUrl}}"
+    controls
+    autoplay
+    show-fullscreen-btn
+    object-fit="contain"
+    class="video-player"
+  ></video>
+
+  <view class="close-btn" bindtap="goBack">×</view>
+</view>
