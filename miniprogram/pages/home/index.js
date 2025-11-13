@@ -10,18 +10,27 @@ Page({
             balance: 0.00,
             memberId: 0
         },
-        venue: {
-        },
+        venue: {},
     },
 
     // 初始化函数
     async onLoad() {
-        const _this =  this;
         const userInfo = userUtils.getUserInfo();
         console.error('userInfo', userInfo)
         this.setData({
             userInfo: userInfo
         })
+
+    },
+
+    onShow() {
+        this.getStoreInfo();
+        // this.getAccountData();
+    },
+
+    // 获取门店信息
+    getStoreInfo() {
+        const _this = this;
         // 获取位置信息 请求
         wx.getLocation({
             type: 'gcj02', // 返回可以用于wx.openLocation的坐标
@@ -30,25 +39,25 @@ Page({
                 console.log("纬度：", res.latitude)
                 const storesData = await stores.getStoreList(res.longitude, res.latitude);
                 if (Array.isArray(storesData) && storesData.length > 0)
-                _this.setData({
+                    _this.setData({
                         venue: {
                             ...storesData[0],
-                            image:'/images/home/banner2.png'
+                            image: '/images/home/banner2.png'
                         },
                     })
                 console.error('cities=', storesData)
                 getApp().globalData.storeId = storesData[0].id;
+                // 更新用户下的余额信息
+                _this.getAccountData();
             },
             fail(err) {
+                _this.getAccountData();
                 console.error("获取位置失败：", err)
             }
         });
     },
 
-    onShow() {
-        this.getAccountData();
-    },
-
+    // 账户信息
     async getAccountData() {
         let _result = await account.getAccountData();
         this.setData({
@@ -105,14 +114,16 @@ Page({
         const _this = this;
         wx.navigateTo({
             url: '/pages/stores/stores',
-            success(res){
+            success(res) {
                 const eventChannel = res.eventChannel; // 获取事件通道
                 eventChannel.on('item', (data) => {
-                  console.log(data); // 输出从页面B传递过来的数据
-                  _this.setData({
-                      venue:data
-                  })
-                  getApp().globalData.storeId = data.id;
+                    console.log(data); // 输出从页面B传递过来的数据
+                    _this.setData({
+                        venue: data
+                    })
+                    getApp().globalData.storeId = data.id;
+                    // 更新用户下的余额信息
+                    _this.getAccountData();
                 });
             }
         });
