@@ -51,32 +51,32 @@
 
     <!-- 四大功能区： 左大立即订场 + 右竖排2个（充值 / 团课） -->
     <view class="feature-row">
-        <view class="feature-left" bindtap="goToBooking">
-            <text class="feature-title">立即订场</text>
-            <image class="feature-icon" src="/images/home/book.png" />
-        </view>
+        <image class="feature-left" bindtap="goToBooking" src="/images/home/book.png">
+            <!-- <text class="feature-title">立即订场</text>
+            <image class="feature-icon" src="/images/home/book.png" /> -->
+        </image>
 
         <view class="feature-right">
-            <view class="feature-top" bindtap="goToRecharge">
-                <text class="small-title">会员\n充值</text>
-                <image class="small-icon" src="/images/home/charge.png" />
-            </view>
-            <view class="feature-bottom" bindtap="goToGroupLesson">
-                <text class="small-title">团课\n活动</text>
-                <image class="small-icon" src="/images/home/group.png" />
-            </view>
+            <image class="feature-top" bindtap="goToRecharge" src="/images/home/charge.png" mode="aspectFill">
+                <!-- <text class="small-title">会员\n充值</text>
+                <image class="small-icon" src="/images/home/charge.png" /> -->
+            </image>
+            <image class="feature-bottom" bindtap="goToGroupLesson" src="/images/home/group.png" mode="aspectFill">
+                <!-- <text class="small-title">团课\n活动</text>
+                <image class="small-icon" src="/images/home/group.png" /> -->
+            </image>
         </view>
     </view>
 
     <!-- 私教预定行：左文案 + 右两个头像 -->
-    <view class="private-row">
-        <view class="private-left" bindtap="goToPrivateCoach">
+    <image class="private-row" src="/images/home/private.png" mode="aspectFill">
+        <!-- <view class="private-left" bindtap="goToPrivateCoach">
             <text class="private-text">私教课预订</text>
         </view>
         <view class="private-right">
             <image class="coach-avatar" src="/images/home/head2.png" />
             <image class="coach-avatar" src="/images/home/head1.png" />
-        </view>
-    </view>
+        </view> -->
+    </image>
 
 </view>

@@ -1,0 +1,87 @@
+.page {
+    background-color: #f2f2f2;
+    min-height: 100vh;
+    padding-top: 16rpx;
+    box-sizing: border-box;
+}
+
+/* 信息卡片 */
+.card-info {
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28rpx 32rpx;
+    font-size: 28rpx;
+    color: #333;
+    background-color: #fff;
+}
+
+.label {
+    font-weight: 400;
+    font-size: 24rpx;
+    color: #7B7B7B;
+}
+
+.value {
+    font-weight: 400;
+    font-size: 24rpx;
+    color: #181818;
+}
+
+.divider {
+    height: 1rpx;
+    background-color: #eee;
+}
+
+/* 优惠券标签 */
+.coupon-tag {
+    background-color: #f0f5ff;
+    color: #3a76ff;
+    font-size: 26rpx;
+    padding: 8rpx 20rpx;
+    border-radius: 30rpx;
+}
+
+/* 底部悬浮栏 */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 46rpx 32rpx;
+    box-sizing: border-box;
+}
+
+.total {
+    font-weight: 400;
+    font-size: 24rpx;
+    color: #181818;
+}
+
+.amount {
+    color: #ff6600;
+    font-weight: 600;
+    margin-left: 8rpx;
+}
+
+.pay-btn {
+    width: 256rpx;
+    height: 72rpx;
+    background-color: rgba(233, 100, 21, 1);
+    border: none;
+    border-radius: 40rpx;
+    font-weight: 300;
+    font-size: 28rpx;
+    color: #FFFFFF;
+    line-height: 72rpx;
+}

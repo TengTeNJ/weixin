@@ -7,28 +7,11 @@ Page({
             avatarUrl: '',
             nickName: '',
             phoneNumber: '',
-            balance: 100.00,
+            balance: 0.00,
             memberId: 0
         },
         venue: {
-            address: "",
-            contact: "",
-            distance: "261.35km",
-            distanceValue: 261350,
-            id: 6,
-            latitude: 31.188819,
-            longitude: 121.44343,
-            name: "腾特AR训练馆上海店",
-            remark: null,
-            tel: "",
-            image: "/images/home/banner2.png"
         },
-        user: {
-            avatar: "/assets/avatar.jpg",
-            name: "Tommy",
-            phone: "18851568978",
-            balance: 100.00
-        }
     },
 
     // 初始化函数

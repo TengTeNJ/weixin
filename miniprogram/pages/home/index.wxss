@@ -146,9 +146,11 @@
 
 /* 左侧大按钮 */
 .feature-left {
+    width: calc(50% - 41rpx);
+    /* 减去一半的gap */
     flex: 1;
     border-radius: 16rpx;
-    background: rgba(233, 100, 21, 0.15);
+    /* background: rgba(233, 100, 21, 0.15); */
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -168,8 +170,9 @@
 .avatar-image {
     width: 100%;
     height: 100%;
-    border-radius: 50%;      /* 确保图片也是圆形 */
-  }
+    border-radius: 50%;
+    /* 确保图片也是圆形 */
+}
 
 .feature-title {
     margin-top: 70rpx;
@@ -180,20 +183,23 @@
 
 /* 右侧竖排两项 */
 .feature-right {
+    width: calc(50% - 41rpx);
+    /* 减去一半的gap */
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 16rpx;
+    height: 460rpx; /*不加这个高度在真机iPhone13上的右侧的会员充值和团课活动都和主视图一样高了*/
 }
 
 .feature-top,
 .feature-bottom {
+    width: 100%; /*不加的话默认会有个image宽高 超出了屏幕的宽度*/
     flex: 1;
     border-radius: 16rpx;
     background: #fff6f0;
     display: flex;
     align-items: center;
-    padding: 20rpx;
     justify-content: space-between;
     box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.04);
 }
@@ -211,6 +217,7 @@
 
 /* 私教行： 左文案 + 右两个小头像 */
 .private-row {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -271,7 +278,7 @@
     display: flex;
 }
 
-.phone-image{
+.phone-image {
     width: 20rpx;
     height: 26rpx;
     margin-right: 12rpx;
@@ -317,12 +324,12 @@
     font-size: 20rpx;
 }
 
-.text-div{
+.text-div {
     display: flex;
     align-items: center;
 }
 
-.text-image{
+.text-image {
     margin-left: 12rpx;
     width: 32rpx;
     height: 16rpx;

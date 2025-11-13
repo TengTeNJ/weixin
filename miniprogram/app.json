@@ -12,7 +12,8 @@
     "pages/me/recharge/rechargeSuccess",
     "pages/stores/stores",
     "pages/coupons/home",
-    "pages/me/video/video"
+    "pages/me/video/video",
+    "pages/coupons/buy"
   ],
   "window": {
     "navigationBarTitleText": "Potent",

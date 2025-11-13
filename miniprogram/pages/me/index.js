@@ -207,6 +207,12 @@ Page({
         const {
             index
         } = e.currentTarget.dataset // 获取传递的数据
+        if(index == 1){
+            wx.makePhoneCall({
+                phoneNumber: '18094391931'
+            })
+            return;
+        }
         wx.showToast({
             title: '敬请期待',
             icon: 'none'

@@ -70,7 +70,7 @@ export default {
     }
       */
     async getAccountData() {
-        return await http.get('/api/member/index', {}, {
+        return await http.get('/api/member/index', {storeId:getApp().globalData.storeId}, {
             'needToken': true
         });
     },

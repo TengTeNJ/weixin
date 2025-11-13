@@ -126,21 +126,10 @@ Page({
         const id = e.currentTarget.dataset.id;
         const plan = this.data.filteredCards.find(p => p.confId === id);
         console.error('id=',id)
-        if (!plan) return;
-        let _result = await recharge.prepayForRecharge(plan.confId,plan.rechargeMoney)
-        console.error('_result=',_result)
-        wx.requestPayment({
-          ..._result.data,
-          success(res) {
-              console.log('支付成功',res)
-              const eventChannel = _this.getOpenerEventChannel();
-              eventChannel.emit('refreshPage');
-              wx.navigateBack();
-          },
-          fail(error) {
-              console.error('error',error)
-          }
-      })
+        wx.redirectTo({
+            url: `/pages/coupons/buy?data=${encodeURIComponent(JSON.stringify(plan))}`,
+            complete() {}
+        })
         //this.pay(plan.amount, plan.bonus);
       },
 

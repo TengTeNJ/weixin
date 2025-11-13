@@ -1,0 +1,47 @@
+<view class="page">
+  <!-- 卡券信息区域 -->
+  <view class="card-info">
+    <view class="info-row">
+      <text class="label">储值卡名称</text>
+      <text class="value">{{configObj.rechargeMoney + configObj.giftMoney}}元储蓄卡</text>
+    </view>
+    <view class="divider"></view>
+
+    <view class="info-row">
+      <text class="label">适用范围</text>
+      <text class="value">{{cardInfo.scope}}</text>
+    </view>
+    <view class="divider"></view>
+
+    <view class="info-row">
+      <text class="label">适用项目</text>
+      <text class="value">{{cardInfo.project}}</text>
+    </view>
+    <view class="divider"></view>
+
+    <view class="info-row">
+      <text class="label">有效期至</text>
+      <text class="value">{{cardInfo.expireDate}}</text>
+    </view>
+    <view class="divider"></view>
+
+    <view class="info-row">
+      <text class="label">优惠券</text>
+      <view 
+        class="coupon-tag" 
+        bindtap="onSelectCoupon"
+      >
+        {{couponText}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部悬浮栏 -->
+  <view class="bottom-bar">
+    <view class="total">
+      <text>总计金额：</text>
+      <text class="amount">￥{{totalAmount}}</text>
+    </view>
+    <button class="pay-btn" bindtap="onPayConfirm">确认支付</button>
+  </view>
+</view>
