@@ -78,9 +78,25 @@ function checkLogin(showModal = true,title) {
   return true;
 }
 
-module.exports = {
-  checkLogin
-};
+// 是否跳转到其他小程序
+function checktoOtherMP(wxAppId) {
+    if (typeof wxAppId !== 'string' || !wxAppId) {
+        return false;
+      }
+      // 微信小程序AppID正则表达式
+      // 格式：wx 开头，后面跟着 16 位十六进制字符（数字和字母a-f）
+      const appIdRegex = /^wx[0-9a-fA-F]{16}$/;
+      const appidFlag = appIdRegex.test(wxAppId.trim())
+     if(appidFlag){
+         wx.navigateToMiniProgram(
+             {
+                appId:wxAppId
+             }
+         );
+         return true;
+     }
+     return false;
+  }
 
 module.exports = {
     saveUserInfo,
@@ -88,5 +104,6 @@ module.exports = {
     saveToken,
     getToken,
     clearUserData,
-    checkLogin
+    checkLogin,
+    checktoOtherMP
 };

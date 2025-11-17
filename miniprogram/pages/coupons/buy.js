@@ -33,6 +33,7 @@ Page({
     },
 
     async onPayConfirm() {
+        const _this = this;
         if (!this.data.configObj) return;
         let _result = await recharge.prepayForRecharge(this.data.configObj.confId,this.data.configObj.rechargeMoney)
         console.error('_result=',_result)
@@ -46,6 +47,9 @@ Page({
           },
           fail(error) {
               console.error('error',error)
+              const eventChannel = _this.getOpenerEventChannel();
+              eventChannel.emit('refreshPage');
+              wx.navigateBack()
           }
       })
 

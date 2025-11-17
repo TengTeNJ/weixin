@@ -19,7 +19,7 @@
     <view class="venue-info-row">
         <image class="map-icon" src="/images/home/map.png" />
         <text class="venue-name">{{venue.name}}</text>
-        <text class="venue-status">{{venue.status}}</text>
+        <text class="venue-status">{{storeStatusMap[venue.storeStatus]}}</text>
     </view>
 
     <!-- 用户信息卡 -->
@@ -69,7 +69,7 @@
     </view>
 
     <!-- 私教预定行：左文案 + 右两个头像 -->
-    <image class="private-row" src="/images/home/private.png" mode="aspectFill">
+    <image class="private-row" src="/images/home/private.png" bind:tap="goToPrivateCoach" mode="aspectFill">
         <!-- <view class="private-left" bindtap="goToPrivateCoach">
             <text class="private-text">私教课预订</text>
         </view>

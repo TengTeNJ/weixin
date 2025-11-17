@@ -1,0 +1,7 @@
+<!--pages/common/empty.wxml-->
+<view class="container">
+<view class="content">
+<image class="empty-image" src="/images/common/empty.png" mode="widthFix"></image>
+<view class="label">暂无数据</view>
+</view>
+</view>

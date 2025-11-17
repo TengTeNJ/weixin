@@ -12,7 +12,7 @@ export default {
      * @param {当前页码} page 
      */
     getList(page) {
-      return http.get('/api/recharge/getList',{page,limit:50},{'needToken':true});
+      return http.get('/api/recharge/getList',{page,limit:50,storeId:getApp().globalData.storeId},{'needToken':true});
     },
   /**
    * 预充值接口
@@ -28,7 +28,7 @@ export default {
 
     // 获取 openid
     const wxOpenId = get(STORAGE_KEYS.OPENID);
-      return http.post('/api/pay/prepayForRecharge',{clientIp,rechargeConfId,rechargeMoney,wxOpenId},{'needToken':true});
+      return http.post('/api/pay/prepayForRecharge',{clientIp,rechargeConfId,rechargeMoney,wxOpenId,storeId:getApp().globalData.storeId},{'needToken':true});
     },
 
     /**
@@ -43,6 +43,16 @@ export default {
 
         let _orderData = await this.prepayForRecharge(rechargeConfId,rechargeMoney);
 
-    }
+    },
+
+    /**
+     * 查询会员卡信息
+     * @param {*} page 
+     * @param {*} cardType 卡类型（0全部、1充值卡，2到期卡）
+
+     */
+    getMemberList(page,cardType = 2) {
+        return http.get('/api/memberCard/getList',{page,cardType,limit:50,storeId:getApp().globalData.storeId},{'needToken':true});
+      },
 
 };

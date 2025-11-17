@@ -164,18 +164,22 @@ Page({
         const {
             index
         } = e.currentTarget.dataset // 获取传递的数据
-        console.error(index)
-
         if (index == 0) {
+            if (getApp().globalData.store && userUtils.checktoOtherMP(getApp().globalData.store.wxAppId)) {
+                return;
+            }
             // 我的订单
-            // 预订页面
             wx.navigateTo({
                 url: '/pages/booking/order/order',
                 complete() {}
             })
         } else if (index == 1) {
+            // 会员充值
+            if (getApp().globalData.store && userUtils.checktoOtherMP(getApp().globalData.store.wxAppId)) {
+                return;
+            }
             wx.navigateTo({
-                url: '/pages/me/recharge/recharge',
+                url: '/pages/coupons/home',
                 events: {
                     refreshPage: () => {
                         //TODO 充值完成后 重新调用接口 刷新页面
@@ -192,13 +196,25 @@ Page({
                 complete() {}
             })
         } else if (index === 3) {
+            var videoUrl = '';
+            console.error(' getApp().globalData.store', getApp().globalData.store)
+            if (getApp().globalData.store && getApp().globalData.store.storeVideo) {
+                videoUrl = getApp().globalData.store.storeVideo;
+            };
+            if(!videoUrl){
+                wx.showToast({
+                    title: '暂无内容',
+                    icon: 'none'
+                })
+                return;
+            }
             wx.navigateTo({
-                url: '/pages/me/video/video?url=' + encodeURIComponent('https://weixin-1368395492.cos.ap-nanjing.myqcloud.com/video/guide.mp4')
+                url: '/pages/me/video/video?url=' + encodeURIComponent(getApp().globalData.store.storeVideo)
             })
         } else {
-            wx.showToast({
-                title: '敬请期待',
-                icon: 'none'
+            const flag = true;
+            wx.navigateTo({
+                url: `/pages/coupons/home?isTerm='${flag}`,
             })
         }
     },
@@ -207,15 +223,15 @@ Page({
         const {
             index
         } = e.currentTarget.dataset // 获取传递的数据
-        if(index == 1){
+        if (index != 0) {
             wx.makePhoneCall({
                 phoneNumber: '18094391931'
             })
             return;
+        }else{
+            wx.navigateTo({
+              url: '/pages/common/empty',
+            })
         }
-        wx.showToast({
-            title: '敬请期待',
-            icon: 'none'
-        })
     },
 })

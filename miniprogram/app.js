@@ -29,6 +29,7 @@ App({
         userInfo: null,
         token: '',
         checkLogin: null,
-        storeId:null
+        storeId:null,
+        store:{}
     }
 })

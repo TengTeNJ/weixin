@@ -54,6 +54,10 @@ Page({
         });
         if (Array.isArray(res) && res.length > 0) {
             const city = res[0];
+            console.error('city.cityName',city.name)
+            this.setData({
+                selectedCity: city.name
+            });
             // 请求门店列表
             this.getStoreList(city.code);
         }

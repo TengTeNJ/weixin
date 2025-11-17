@@ -1,0 +1,19 @@
+.container {
+    height: 100vh;
+    padding: 110rpx;
+    background-color: rgba(239, 239, 239, 1);
+}
+
+.content {
+    margin: 0 auto;
+}
+
+.empty-image {
+    width: 136rpx;
+}
+
+.label {
+    font-weight: 400;
+    font-size: 28rpx;
+    color: #7B7B7B;
+}

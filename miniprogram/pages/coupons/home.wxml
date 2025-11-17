@@ -1,77 +1,80 @@
 <view class="page">
 
-<!-- 顶部筛选栏 -->
-<view class="filter-bar">
-  <!-- 左侧：全部类型 + 下拉三角 -->
-  <view class="filter-left" bindtap="showTypePopup">
-    <text>{{selectedType}}</text>
-    <text class="triangle">▼</text>
-    <!-- <image class="arrow-down" src="/images/icons/arrow-down.png"></image> -->
-  </view>
-
-  <!-- 竖线 -->
-  <view class="divider"></view>
-
-  <!-- 右侧类型标签 -->
-  <view class="filter-right">
-    <block wx:for="{{types}}" wx:key="index">
-      <view
-        class="tag {{selectedType === item ? 'active' : ''}}"
-        bindtap="onTypeSelect"
-        data-type="{{item}}"
-      >
-        {{item}}
-      </view>
-    </block>
-  </view>
-</view>
-
-<!-- 卡片列表 -->
-<scroll-view scroll-y class="card-list">
-  <block wx:for="{{filteredCards}}" wx:key="id">
-    <view class="card-item" bindtap="selectPlan" data-id="{{item.confId}}" style="background: linear-gradient(to right, {{item.bgStart}}, {{item.bgEnd}})">
-      <!-- 顶部信息 -->
-      <view class="card-top">
-        <view class="card-title">{{item.title}}</view>
-        <view class="card-value">面值：{{item.rechargeMoney + item.giftMoney}}</view>
-      </view>
-
-      <!-- 中间信息 -->
-      <view class="card-middle">
-        <text>可用范围：{{item.range}}</text>
-        <text>有效期至：{{item.expire}}</text>
-      </view>
-
-      <view class="line" style="background-color: {{item.lineColor}};"></view>
-
-      <!-- 底部信息 -->
-      <view class="card-bottom">
-        <view class="price-info">
-          <text class="price">¥{{item.rechargeMoney}}</text>
-          <text class="origin">原价：<text class="origin-text">{{item.rechargeMoney + item.giftMoney}}元</text>
-            </text>
+    <!-- 顶部筛选栏 -->
+    <view class="filter-bar">
+        <!-- 左侧：全部类型 + 下拉三角 -->
+        <view class="filter-left" bindtap="showTypePopup">
+            <text>{{selectedType}}</text>
+            <text class="triangle">▼</text>
+            <!-- <image class="arrow-down" src="/images/icons/arrow-down.png"></image> -->
         </view>
-        <image class="arrow" src="/images/mine/arrow-right.png" mode="aspectFit"></image>
-      </view>
 
-      <!-- 底部额外文案 -->
-      <!-- <view class="card-extra">
+        <!-- 竖线 -->
+        <view class="divider"></view>
+
+        <!-- 右侧类型标签 -->
+        <view class="filter-right">
+            <block wx:for="{{types}}" wx:key="index">
+                <view class="tag {{selectedType === item ? 'active' : ''}}" bindtap="onTypeSelect" data-type="{{item}}">
+                    {{item}}
+                </view>
+            </block>
+        </view>
+    </view>
+
+    <!-- 卡片列表 -->
+    <scroll-view scroll-y class="card-list">
+        <view class="empty-container" wx:if="{{!filteredCards || filteredCards.length === 0}}">
+            <image class="empty-img" src="/images/common/empty.png" mode="aspectFit"></image>
+            <view class="empty-text">暂无数据</view>
+        </view>
+        <view wx:else>
+            <block wx:for="{{filteredCards}}" wx:key="id">
+                <view class="card-item" bindtap="selectPlan" data-item="{{item}}" data-id="{{item.confId}}" style="background: linear-gradient(to right, {{item.bgStart}}, {{item.bgEnd}})">
+                    <!-- 顶部信息 -->
+                    <view class="card-top">
+                        <view class="card-title">{{item.title}}</view>
+                        <view class="card-value">面值：{{item.rechargeMoney + item.giftMoney}}</view>
+                    </view>
+
+                    <!-- 中间信息 -->
+                    <view class="card-middle">
+                        <text>可用范围：{{item.range}}</text>
+                        <text>有效期至：{{item.expire}}</text>
+                    </view>
+
+                    <view class="line" style="background-color: {{item.lineColor}};"></view>
+
+                    <!-- 底部信息 -->
+                    <view class="card-bottom">
+                        <view class="price-info">
+                            <text class="price"> {{ item.isTerm ? ('可兑换次数：') : ('¥' + item.rechargeMoney) }}</text>
+                            <text wx:if="{{item.isTerm }}" class="origin">{{item.cardTotalCount - item.cardUsedCount}}次</text>
+                            <text wx:else class="origin">原价：<text class="origin-text">{{item.rechargeMoney + item.giftMoney}}元</text>
+                            </text>
+                        </view>
+                        <image class="arrow" src="/images/mine/arrow-right.png" mode="aspectFit"></image>
+                    </view>
+
+                    <!-- 底部额外文案 -->
+                    <!-- <view class="card-extra">
         <text wx:if="{{item.type === '储值卡'}}">购买后可直接充值到账户余额</text>
         <text wx:if="{{item.type === '期限卡'}}">购买后自动激活有效期</text>
       </view> -->
-    </view>
-  </block>
-</scroll-view>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
 
-<!-- 底部弹窗 -->
-<view wx:if="{{showPopup}}" class="popup-mask" bindtap="hideTypePopup"></view>
-<view wx:if="{{showPopup}}" class="popup">
-  <block wx:for="{{types}}" wx:key="index">
-    <view class="popup-item" bindtap="selectTypeFromPopup" data-type="{{item}}">
-      {{item}}
+    <!-- 底部弹窗 -->
+    <view wx:if="{{showPopup}}" class="popup-mask" bindtap="hideTypePopup"></view>
+    <view wx:if="{{showPopup}}" class="popup">
+        <block wx:for="{{types}}" wx:key="index">
+            <view class="popup-item" bindtap="selectTypeFromPopup" data-type="{{item}}">
+                {{item}}
+            </view>
+        </block>
+        <!-- 显式取消按钮 -->
+        <view class="popup-cancel" bindtap="hideTypePopup">取消</view>
     </view>
-  </block>
-  <!-- 显式取消按钮 -->
-  <view class="popup-cancel" bindtap="hideTypePopup">取消</view>
-</view>
 </view>

@@ -53,6 +53,10 @@ export default {
                 distance: item.distanceStr,
                 distanceValue: item.distanceBd,
                 remark: item.storeRemark,
+                closeTime: item.closeTime,
+                storeStatus: item.storeStatus,
+                wxAppId: item.wxAppId,
+                storeVideo: item.storeVideo
                }));
               return(stores);
          }else{

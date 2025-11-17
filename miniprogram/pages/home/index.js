@@ -3,6 +3,12 @@ import userUtils from '../../utils/user'
 import stores from '../../api/stores'
 Page({
     data: {
+        storeStatusMap: {
+            1: '已关店',
+            2: '即将开业',
+            3: '营业中', 
+            4: '休息中'
+          },
         userInfo: {
             avatarUrl: '',
             nickName: '',
@@ -20,11 +26,10 @@ Page({
         this.setData({
             userInfo: userInfo
         })
-
+        this.getStoreInfo();
     },
 
     onShow() {
-        this.getStoreInfo();
         // this.getAccountData();
     },
 
@@ -42,13 +47,13 @@ Page({
                     _this.setData({
                         venue: {
                             ...storesData[0],
-                            image: '/images/home/banner2.png'
                         },
                     })
-                console.error('cities=', storesData)
                 getApp().globalData.storeId = storesData[0].id;
+                getApp().globalData.store = storesData[0];
                 // 更新用户下的余额信息
                 _this.getAccountData();
+                console.error('_this.data.venue',_this.data.venue)
             },
             fail(err) {
                 _this.getAccountData();
@@ -117,11 +122,14 @@ Page({
             success(res) {
                 const eventChannel = res.eventChannel; // 获取事件通道
                 eventChannel.on('item', (data) => {
-                    console.log(data); // 输出从页面B传递过来的数据
+                    console.log('data',data); // 输出从页面B传递过来的数据
+                    // data 和之前 venue 的引用一样（你 stores 页面 emit 的对象被复用了），渲染层不会认为它变了。
                     _this.setData({
-                        venue: data
+                        venue: {...data} // 需要copy一份，不能直接——this.setData({  venue:data})   
                     })
                     getApp().globalData.storeId = data.id;
+                    getApp().globalData.store = data;
+                    console.error('getApp().globalData.storeId', getApp().globalData.storeId)
                     // 更新用户下的余额信息
                     _this.getAccountData();
                 });
@@ -141,7 +149,11 @@ Page({
         });
     },
 
+    // 预订页面
     goToBooking() {
+        if(userUtils.checktoOtherMP(this.data.venue.wxAppId)){
+            return;
+        }
         // 预订页面
         const app = getApp();
         if (!app.globalData.checkLogin()) {
@@ -152,7 +164,11 @@ Page({
         })
     },
 
+    // 充值页面
     goToRecharge() {
+        if(userUtils.checktoOtherMP(this.data.venue.wxAppId)){
+            return;
+        }
         // 预订页面
         const app = getApp();
         if (!app.globalData.checkLogin()) {
@@ -178,15 +194,17 @@ Page({
         })
     },
 
+    // 团课活动
     goToGroupLesson() {
         wx.navigateTo({
-            url: '/pages/groupLesson/groupLesson'
+            url: '/pages/common/empty'
         });
     },
-
-    goToPrivateCoach() {
+    
+    // 私教课预定
+    goToPrivateCoach(){
         wx.navigateTo({
-            url: '/pages/privateCoach/privateCoach'
+            url: '/pages/common/empty'
         });
-    }
+    },
 });

@@ -13,7 +13,7 @@
         <!-- 左侧场地菜单 -->
         <view class="venue-menu">
             <view class="venue-item" wx:for="{{venueList}}" wx:key="index" bindtap="onVenueSelect" data-index="{{index}}" style="{{index === 0 ? 'background: #fff;' : (selectedVenueIndex === index ? 'background: #FFF2E5; color: #181818;' : '')}}">
-                <text>{{item}}</text>
+                <text style="white-space: pre-line;">{{item}}</text>
                 <!-- 训练场才显示小三角 ▼ -->
                 <text class="triangle" wx:if="{{index === 0}}">▼</text>
             </view>

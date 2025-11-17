@@ -16,7 +16,7 @@ Page({
                 expire: '不限期',
                 bgStart: '#444444',
                 bgEnd: '#888888',
-                lineColor:'#E8C8AA'
+                lineColor: '#E8C8AA'
             },
             {
                 id: 2,
@@ -43,22 +43,29 @@ Page({
                 bgEnd: '#FF9900'
             }
         ],
-        filteredCards: []
+        terms: [],
+        filteredCards: [],
+        isOnlyTerm: false, // 仅仅卡券 体验券
     },
 
-   async onLoad() {
+    async onLoad(options) {
+        if(options && options.isTerm){
+            this.setData({
+                types: ['期限卡'],
+                selectedType: '期限卡',
+            })
+        }
         this.filterCards();
-        this.getConfigList();
     },
 
     // 获取类型列表
     async getConfigList() {
         let _data = await recharge.getList(1);
-        console.error('_data=',_data);
+        console.error('_data=', _data);
         // 对返回的数组做处理
         let list = _data.data.map(item => {
             // 根据返回数据计算颜色或其他属性
-            let bgStart   = '#B16922';
+            let bgStart = '#B16922';
             let bgEnd = '#EBC09B';
             let lineColor = '#E8C8AA';
             if (item.rechargeMoney >= 1000) {
@@ -75,34 +82,59 @@ Page({
             // 给每一条数据加上新的属性
             return {
                 ...item, // 原有数据保留
-                title:'储值卡',
+                title: '储值卡',
                 range: '预约场地', // 固定值
                 expire: '不限期', // 固定值
                 bgStart, // 计算出的颜色
                 bgEnd, // 计算出的颜色
-                lineColor
+                lineColor,
+                isTerm: false // 是否是期限卡
             };
         });
-
-        console.error('list=',list);
-
         this.setData({
-            filteredCards: list
+            cards: list
         })
     },
 
+    // 获取期限卡列表
+    async getTermCardlList() {
+        let _data = await recharge.getMemberList(1);
+        // 对返回的数组做处理
+        let list = _data.data.map(item => {
+            // 根据返回数据计算颜色或其他属性
+            let bgStart = '#0A811E';
+            let bgEnd = '#8AE8A0';
+            let lineColor = '#8DDC82';
+            // 给每一条数据加上新的属性
+            return {
+                ...item, // 原有数据保留
+                title: item.cardName,
+                range: '预约场地', // 固定值
+                expire: '不限期', // 固定值
+                bgStart, // 计算出的颜色
+                bgEnd, // 计算出的颜色
+                lineColor,
+                isTerm: true // 是否是期限卡
+            };
+        });
+        this.setData({
+            terms: list
+        });
+    },
+
+    // 类型弹窗
     showTypePopup() {
         this.setData({
             showPopup: true
         });
     },
-
+    // 隐藏类型弹窗
     hideTypePopup() {
         this.setData({
             showPopup: false
         });
     },
-
+    // 选择类型弹窗
     selectTypeFromPopup(e) {
         const type = e.currentTarget.dataset.type;
         this.setData({
@@ -120,27 +152,58 @@ Page({
         this.filterCards();
     },
 
-      // 充值
-      async selectPlan(e) {
-        const _this = this;
+    // 充值
+    async selectPlan(e) {
         const id = e.currentTarget.dataset.id;
+        console.error('e.currentTarget.dataset',e.currentTarget.dataset)
+        if(e.currentTarget.dataset.item.isTerm){
+            // 体验券
+            let content = '请到店联系前台进行核销'
+            if((e.currentTarget.dataset.item.cardTotalCount - e.currentTarget.dataset.item.cardUsedCount) <= 0){
+                content = '体验卡已用完';
+            }
+            wx.showModal({
+                title: '提示',
+                content: content,
+                showCancel: false
+            })
+            return;
+        }
         const plan = this.data.filteredCards.find(p => p.confId === id);
-        console.error('id=',id)
-        wx.redirectTo({
+        console.error('id=', id)
+        wx.navigateTo({
             url: `/pages/coupons/buy?data=${encodeURIComponent(JSON.stringify(plan))}`,
             complete() {}
         })
         //this.pay(plan.amount, plan.bonus);
-      },
+    },
 
-    filterCards() {
+    async filterCards() {
+        // 刷新数据
         const {
             selectedType,
-            cards
         } = this.data;
-        const filtered = selectedType === '全部' ? cards : cards.filter(item => item.type === selectedType);
-        this.setData({
-            filteredCards: filtered
-        });
+        if ((selectedType === '储值卡')) {
+            await this.getConfigList();
+            this.setData({
+                filteredCards: [...this.data.cards]
+            });
+        } else if (selectedType === '全部') {
+            await this.getConfigList();
+            await this.getTermCardlList();
+            this.setData({
+                filteredCards: [...this.data.cards, ...this.data.terms]
+            });
+        } else if (selectedType === '期限卡') {
+            await this.getTermCardlList();
+            this.setData({
+                filteredCards: [...this.data.terms]
+            });
+        } else {
+            this.setData({
+                filteredCards: []
+            });
+        }
+
     }
 });
