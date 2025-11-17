@@ -75,6 +75,12 @@ export function request(options) {
                         icon: 'none',
                         duration: 2000
                     });
+                    if ((res.data.code === '401')) {
+                        // 清空缓存
+                        console.warn('清空缓存')
+                        user.clearUserData();
+
+                    }
                     reject(new Error(res.data.msg || '请求失败'));
                 }
             },

@@ -88,6 +88,19 @@ function isBeforeStartTime(startTime) {
     return currentTime < startTime;
   }
 
+  /**
+   * 处理后台返回的多的转义字符，后台常返回这样的字符串：迷你Ace\\n硬地训练场
+      其实我配置的是迷你Ace\n硬地训练场
+   * @param {*} content 后台返回的数据
+   */
+  function handleWhiteSpace(content){
+    // 1) \\ → \
+    content = content.replace(/\\\\/g, '\\');// \\正则部分 JS 中的两个反斜杠 /g 是 正则表达式的修饰符（flag），表示 全局匹配（global）。
+    // 2) \n → 换行
+    content = content.replace(/\\n/g, '\n'); // \\正则部分 JS 中的一个反斜杠 /g 是 正则表达式的修饰符（flag），表示 全局匹配（global）。
+    return content;
+  }
+
 module.exports = {
     formatTime,
     getOpenId,
@@ -95,5 +108,6 @@ module.exports = {
     getFormattedTime,
     getLoginCode,
     getWeekday,
-    isBeforeStartTime
+    isBeforeStartTime,
+    handleWhiteSpace
 };

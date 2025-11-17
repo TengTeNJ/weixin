@@ -70,7 +70,6 @@ export default {
     }
       */
     async getAccountData() {
-        console.error('getAccountData',getApp().globalData.storeId)
         return await http.get('/api/member/index', {storeId:getApp().globalData.storeId}, {
             'needToken': true
         });

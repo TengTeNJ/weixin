@@ -214,7 +214,9 @@ Page({
                         element.selected = false
                     });
                     // 执行操作
-                    fieldNames.push(currentValue.fieldName)
+                  let _name = utils.handleWhiteSpace(currentValue.fieldName);
+                  console.warn('_name',_name)
+                    fieldNames.push(_name);
                     datas.push(currentValue.fieldPriceList)
                 });
                 const firstField = result.data[0];
