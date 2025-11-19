@@ -48,7 +48,7 @@
       "desc": "用于显示用户头像与昵称"
     },
     "scope.userLocation": {
-      "desc": "你的位置信息将用于获取当前城市"
+      "desc": "你的位置信息将用于获取门店信息"
     }
   },
   "requiredPrivateInfos": [

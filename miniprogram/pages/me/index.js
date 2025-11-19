@@ -96,6 +96,15 @@ Page({
 
     onShow() {
         this.getAccountData();
+          // 更新用户信息
+          let userInfo = userUtils.getUserInfo();
+          userInfo.nickName = _result.data.nickName;
+          userInfo.avatarUrl = _result.data.avatar;
+          userInfo.phoneNumber = _result.data.accountNo;
+          userUtils.saveUserInfo(userInfo)
+          this.setData({
+             userInfo:userInfo
+          });
     },
 
      // 获取用户余额

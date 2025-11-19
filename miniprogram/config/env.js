@@ -11,14 +11,14 @@ const envConfig = {
     test: {
       baseUrl: 'https://test-api.example.com'
     },
-    // 生产环境
+    // 生产环境 https://book.fjcctv.com 
     production: {
-      baseUrl: 'https://book.fjcctv.com'
+      baseUrl: 'https://book-prod.fjcctv.com'
     }
   };
   
   // 当前环境（修改这里切换环境）
-  const currentEnv = 'development';
+  const currentEnv = 'production';
   
   // 导出当前环境的配置
   export const baseUrl = envConfig[currentEnv].baseUrl;
