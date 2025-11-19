@@ -79,7 +79,8 @@ export function request(options) {
                         // 清空缓存
                         console.warn('清空缓存')
                         user.clearUserData();
-
+                        // 通知退出登录
+                        getApp().eventBus.emit('logout');
                     }
                     reject(new Error(res.data.msg || '请求失败'));
                 }

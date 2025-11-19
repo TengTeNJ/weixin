@@ -75,5 +75,16 @@ export default {
         });
     },
 
+    /**
+     * 更新用户信息
+     * @param {*} nickName 昵称
+     * @param {*} avatar 头像地址
+     */
+    async updateUserInfo(nickName,avatar) {
+        return await http.post('/api/member/update', {nickName,avatar}, {
+            'needToken': true
+        });
+    },
+
 
 };

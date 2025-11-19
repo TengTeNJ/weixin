@@ -47,7 +47,8 @@ export default {
                 priceIdList,
                 wxOpenId,
                 'telephone': phone,
-                payType
+                payType,
+                storeId:getApp().globalData.storeId
             }, {
                 'needToken': true
             });
@@ -56,7 +57,7 @@ export default {
             console.error('获取 IP 失败:', err);
             // 可选：继续请求或者返回错误
             return http.post('/api/pay/prepay', {
-                priceIdList: priceIdList
+                priceIdList: priceIdList,
             }, {
                 'needToken': true
             });

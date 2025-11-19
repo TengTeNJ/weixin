@@ -44,6 +44,8 @@ Page({
                 title: '场馆须知'
             },
         ],
+        newNickname: "",// 输入框正在输入的
+        showPopup: false
     },
     onUserTap() {
         const _this = this;
@@ -51,7 +53,6 @@ Page({
             wx.getUserProfile({
                 desc: '获取您的头像与昵称',
                 success(res) {
-                    console.error('123', res);
                     const {
                         avatarUrl,
                         nickName
@@ -88,9 +89,8 @@ Page({
     // 初始化函数
     onLoad() {
         const userInfo = userUtils.getUserInfo();
-        console.error('userInfo', userInfo)
         this.setData({
-            userInfo: userInfo
+            userInfo: userInfo,
         })
     },
 
@@ -98,6 +98,7 @@ Page({
         this.getAccountData();
     },
 
+     // 获取用户余额
     async getAccountData() {
         let _result = await account.getAccountData();
         this.setData({
@@ -136,7 +137,6 @@ Page({
             });
             return;
         }
-        console.error('code=', code)
         const result = await account.weixinPhoneLogin(encryptedData, iv, code);
         this.setData({
             'userInfo.avatarUrl': result.data.avatar,
@@ -197,7 +197,6 @@ Page({
             })
         } else if (index === 3) {
             var videoUrl = '';
-            console.error(' getApp().globalData.store', getApp().globalData.store)
             if (getApp().globalData.store && getApp().globalData.store.storeVideo) {
                 videoUrl = getApp().globalData.store.storeVideo;
             };
@@ -234,4 +233,42 @@ Page({
             })
         }
     },
+
+    openNicknamePopup() {
+        this.setData({
+          showPopup: true,
+          newNickname: this.data.nickname  // 默认填入旧昵称
+        });
+      },
+    
+      closePopup() {
+        this.setData({
+          showPopup: false
+        });
+      },
+    
+      onNicknameInput(e) {
+        this.setData({
+          newNickname: e.detail.value
+        });
+      },
+      async confirmNickname() {
+        const newName = this.data.newNickname.trim();
+        if (!newName) {
+          wx.showToast({ title: "昵称不能为空", icon: "none" });
+          return;
+        }
+        // 🔥这里可以加入接口请求保存昵称
+       await account.updateUserInfo(newName)
+        this.setData({
+          showPopup: false
+        });
+        wx.showToast({ title: "修改成功" });
+        let userInfo = userUtils.getUserInfo();
+        userInfo.nickName = newName;
+        userUtils.saveUserInfo(userInfo)
+        this.setData({
+            userInfo: userInfo,
+        })
+      }
 })

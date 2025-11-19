@@ -3,16 +3,6 @@
     <view class="top-image">
         <image src="/images/mine/top.png" class="top-image-class" mode="heightFix"></image>
     </view>
-    <!-- 用户信息区域 -->
-    <!-- <view class="user-info">
-        <image class="avatar" src="https://example.com/avatar.jpg"></image>
-        <view class="user-text">
-            <view class="nickname">Tommy</view>
-            <view class="phone">📱 1885156878</view>
-        </view>
-        <view class="balance">余额 ￥100.00</view>
-    </view> -->
-
     <!-- 头像 + 用户信息 -->
     <view class="user-info">
         <!--头像-->
@@ -23,8 +13,7 @@
 
         <!-- <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}"></image> -->
         <view class="user-text">
-
-            <view class="nickname">{{userInfo.nickName || '未登录'}}</view>
+            <view class="nickname" bindtap="openNicknamePopup">{{userInfo.nickName || '未登录'}}</view>
             <!--手机号-->
             <view wx:if="{{userInfo.phoneNumber}}" class="phone">
                 <image src="/images/home/phone.png" class="phone-image" mode="aspectFit"></image>
@@ -34,7 +23,6 @@
         </view>
         <view class="balance">余额 ￥{{balance}}</view>
     </view>
-
     <!-- 获取手机号隐藏按钮（必须用户点击触发）-->
     <!-- 功能入口 -->
     <view class="grid-container">
@@ -57,4 +45,21 @@
             </view>
         </block>
     </view>
+    <!-- 昵称弹窗 -->
+<view wx:if="{{showPopup}}" class="popup-mask">
+  <view class="popup-box">
+    <view class="popup-title">修改昵称</view>
+    <view class="old-name">当前昵称：{{userInfo.nickName}}</view>
+    <input 
+      class="input"
+      placeholder="请输入新的昵称"
+      value="{{newNickname}}"
+      bindinput="onNicknameInput"
+    />
+    <view class="btn-row">
+      <button class="btn-cancel" bindtap="closePopup">取消</button>
+      <button class="btn-confirm" bindtap="confirmNickname">确定</button>
+    </view>
+  </view>
+</view>
 </view>

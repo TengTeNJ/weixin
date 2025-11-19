@@ -54,6 +54,10 @@ Page({
                 types: ['期限卡'],
                 selectedType: '期限卡',
             })
+            // 修改标题
+            wx.setNavigationBarTitle({
+                title:'我的卡券'
+            });
         }
         this.filterCards();
     },

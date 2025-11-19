@@ -1,6 +1,7 @@
 import account from '../../api/account'
 import userUtils from '../../utils/user'
 import stores from '../../api/stores'
+import { get } from '../../utils/storage';
 Page({
     data: {
         storeStatusMap: {
@@ -23,15 +24,31 @@ Page({
     // 初始化函数
     async onLoad() {
         const userInfo = userUtils.getUserInfo();
-        console.error('userInfo', userInfo)
         this.setData({
             userInfo: userInfo
         })
+        // 获取门信息
         this.getStoreInfo();
+        // 退出登录监听
+        this.onListenLogout();
+    },
+
+    // 监听登录退出状态
+    onListenLogout(){
+        getApp().eventBus.on('logout', () => {
+            // 这里写页面刷新逻辑
+            const userInfo = userUtils.getUserInfo();
+            this.setData({
+                userInfo: userInfo
+            })
+          });
     },
 
     onShow() {
-        // this.getAccountData();
+        if(!getApp().globalData.storeId){
+            return;
+        }
+        this.getAccountData();
     },
 
     // 获取门店信息
@@ -65,10 +82,16 @@ Page({
 
     // 账户信息
     async getAccountData() {
-        console.error('123')
         let _result = await account.getAccountData();
-        console.error('456')
-        console.error('_result', _result)
+        // 更新用户信息
+        let userInfo = userUtils.getUserInfo();
+        userInfo.nickName = _result.data.nickName;
+        userInfo.avatarUrl = _result.data.avatar;
+        userInfo.phoneNumber = _result.data.accountNo;
+        userUtils.saveUserInfo(userInfo)
+        this.setData({
+           userInfo:userInfo
+        });
         this.setData({
             balance: _result.data.usableMoney,
         });
@@ -105,7 +128,6 @@ Page({
             });
             return;
         }
-        console.error('code=', code)
         const result = await account.weixinPhoneLogin(encryptedData, iv, code);
         this.setData({
             'userInfo.avatarUrl': result.data.avatar,

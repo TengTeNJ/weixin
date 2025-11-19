@@ -31,5 +31,20 @@ App({
         checkLogin: null,
         storeId:null,
         store:{}
+    },
+     // 简易事件总线
+  eventBus: {
+    events: {},
+    on(name, fn) {
+      if (!this.events[name]) {
+        this.events[name] = [];
+      }
+      this.events[name].push(fn);
+    },
+    emit(name, data) {
+      if (this.events[name]) {
+        this.events[name].forEach(fn => fn(data));
+      }
     }
+  }
 })
