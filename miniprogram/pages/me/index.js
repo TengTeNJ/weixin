@@ -96,20 +96,20 @@ Page({
 
     onShow() {
         this.getAccountData();
-          // 更新用户信息
-          let userInfo = userUtils.getUserInfo();
-          userInfo.nickName = _result.data.nickName;
-          userInfo.avatarUrl = _result.data.avatar;
-          userInfo.phoneNumber = _result.data.accountNo;
-          userUtils.saveUserInfo(userInfo)
-          this.setData({
-             userInfo:userInfo
-          });
     },
 
      // 获取用户余额
     async getAccountData() {
         let _result = await account.getAccountData();
+        // 更新用户信息
+        let userInfo = userUtils.getUserInfo();
+        userInfo.nickName = _result.data.nickName;
+        userInfo.avatarUrl = _result.data.avatar;
+        userInfo.phoneNumber = _result.data.accountNo;
+        userUtils.saveUserInfo(userInfo)
+        this.setData({
+           userInfo:userInfo
+        });
         this.setData({
             balance: _result.data.usableMoney,
         });
@@ -146,17 +146,19 @@ Page({
             });
             return;
         }
-        const result = await account.weixinPhoneLogin(encryptedData, iv, code);
+        const result = await account.weixinPhoneLogin(encryptedData, iv, code);      
         this.setData({
             'userInfo.avatarUrl': result.data.avatar,
             'userInfo.nickName': result.data.nickName,
             'userInfo.phoneNumber': result.data.accountNo || result.data.nickName
         });
         // 存储用户信息
-        userUtils.saveUserInfo(this.data.userInfo)
+        userUtils.saveUserInfo(this.data.userInfo)  
         // 获取token 并进行存储
         const token = result.data.memberToken;
         userUtils.saveToken(token);
+        this.getAccountData();
+
     },
 
     async onClickGrid(e) {
