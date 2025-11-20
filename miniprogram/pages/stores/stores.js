@@ -66,8 +66,8 @@ Page({
     // 请求门店列表
     async getStoreList(cityCode, sortOrder) {
         const _this = this;
-        wx.getLocation({
-            type: 'gcj02', // 返回可以用于wx.openLocation的坐标
+        wx.getFuzzyLocation({
+            type: 'wgs84',
             async success(res) {
                 const storesData = await stores.getStoreList(res.longitude, res.latitude, sortOrder, cityCode);
                 if (Array.isArray(storesData) && storesData.length > 0)

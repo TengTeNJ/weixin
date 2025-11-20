@@ -15,16 +15,27 @@ App({
             env: 'cloudbase-0gqm4lqt40d5b6b5', // 必填
             traceUser: true, // 可选，是否记录用户访问
         })
-        // 登录
-        // wx.login({
-        //     success: res => {
-        //         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        //         console.error('res', res)
-        //     }
-        // })
         // 将检查登录方法挂载到全局
         this.globalData.checkLogin = checkLogin;
+        
+        const updateManager = wx.getUpdateManager()
+        updateManager.onCheckForUpdate(function (res) {
+          console.log('hasUpdate:', res.hasUpdate)
+        })
+    
+        updateManager.onUpdateReady(function () {
+          updateManager.applyUpdate()
+        })
+    
+        updateManager.onUpdateFailed(function () {
+          wx.showModal({
+            title: '更新失败',
+            content: '请删除小程序重新进入'
+          })
+        })
     },
+
+
     globalData: {
         userInfo: null,
         token: '',

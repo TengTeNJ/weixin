@@ -197,7 +197,6 @@
     width: 100%; /*不加的话默认会有个image宽高 超出了屏幕的宽度*/
     flex: 1;
     border-radius: 16rpx;
-    background: #fff6f0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -222,7 +221,6 @@
     align-items: center;
     justify-content: space-between;
     height: 114rpx;
-    background: rgba(233, 100, 21, 0.15);
     border-radius: 10rpx 10rpx 10rpx 10rpx;
 }
 

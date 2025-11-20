@@ -55,8 +55,8 @@ Page({
     getStoreInfo() {
         const _this = this;
         // 获取位置信息 请求
-        wx.getLocation({
-            type: 'gcj02', // 返回可以用于wx.openLocation的坐标
+        wx.getFuzzyLocation({
+            type: 'wgs84',
             async success(res) {
                 console.log("经度：", res.longitude)
                 console.log("纬度：", res.latitude)
