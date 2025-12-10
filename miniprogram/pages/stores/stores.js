@@ -35,7 +35,6 @@ Page({
     // 切换门店
     selectStore(e) {
         const _this = this;
-        console.error('e.currentTarget.dataset', e.currentTarget.dataset)
         const {
             item
         } = e.currentTarget.dataset
@@ -48,13 +47,11 @@ Page({
     // 请求城市列表
     async getStoreCode() {
         const res = await stores.getCityList();
-        console.error('res111=', res);
         this.setData({
             cities: res
         });
         if (Array.isArray(res) && res.length > 0) {
             const city = res[0];
-            console.error('city.cityName',city.name)
             this.setData({
                 selectedCity: city.name
             });
@@ -74,10 +71,8 @@ Page({
                     _this.setData({
                         venueList: storesData,
                     })
-                console.error('cities=', storesData)
             },
             fail(err) {
-                console.error("获取位置失败：", err)
             }
         })
     },

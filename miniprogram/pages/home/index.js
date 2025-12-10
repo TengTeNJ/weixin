@@ -60,24 +60,26 @@ Page({
             async success(res) {
                 console.log("经度：", res.longitude)
                 console.log("纬度：", res.latitude)
-                const storesData = await stores.getStoreList(res.longitude, res.latitude);
-                if (Array.isArray(storesData) && storesData.length > 0)
-                    _this.setData({
-                        venue: {
-                            ...storesData[0],
-                        },
-                    })
-                getApp().globalData.storeId = storesData[0].id;
-                getApp().globalData.store = storesData[0];
-                // 更新用户下的余额信息
-                _this.getAccountData();
-                console.error('_this.data.venue', _this.data.venue)
+            _this.getStoreAndAccountData(res.longitude,res.latitude);
             },
             fail(err) {
-                _this.getAccountData();
-                console.error("获取位置失败：", err)
+                _this.getStoreAndAccountData();
             }
         });
+    },
+
+    async getStoreAndAccountData(longitude,latitude){
+        const storesData = await stores.getStoreList(longitude, latitude);
+        if (Array.isArray(storesData) && storesData.length > 0)
+            this.setData({
+                venue: {
+                    ...storesData[0],
+                },
+            })
+        getApp().globalData.storeId = storesData[0].id;
+        getApp().globalData.store = storesData[0];
+        // 更新用户下的余额信息
+        this.getAccountData();
     },
 
     // 账户信息
@@ -159,7 +161,6 @@ Page({
                     })
                     getApp().globalData.storeId = data.id;
                     getApp().globalData.store = data;
-                    console.error('getApp().globalData.storeId', getApp().globalData.storeId)
                     // 更新用户下的余额信息
                     _this.getAccountData();
                 });

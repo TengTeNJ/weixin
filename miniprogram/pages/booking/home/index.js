@@ -70,7 +70,6 @@ Page({
      */
     onDateSelect(e) {
         if (this.data.selectedDateIndex == e.currentTarget.dataset.index) {
-            console.error('防止重复点击');
             return;
         }
         // 把所有的数据选中状态清空
@@ -122,7 +121,6 @@ Page({
             // 场地日期
             timeList[index]['date'] = this.data.dateList[this.data.selectedDateIndex]['date']
             this.data.selectDataList.push(timeList[index]);
-            console.error('selected', timeList[index])
             this.data.totalPrice += timeList[index].periodPrice;
         } else {
             // 反选的需要移除
@@ -130,7 +128,6 @@ Page({
             console.warn('index', index)
             const deletedIndex = this.data.selectDataList.findIndex(item => (item.priceId === timeList[index].priceId && item.fieldId === timeList[index].fieldId));
             if (index !== -1) {
-                console.error('移除', timeList[index].startTime)
                 this.data.selectDataList.splice(deletedIndex, 1); // 从该索引位置移除一个元素
                 this.data.totalPrice -= timeList[index].periodPrice;
             }
@@ -233,7 +230,6 @@ Page({
             })
 
         } catch (error) {
-            console.error('加载场地数据失败:', error);
             this.setData({
                 loading: false
             });

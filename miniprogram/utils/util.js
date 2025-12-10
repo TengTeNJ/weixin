@@ -24,7 +24,6 @@ async function getOpenId() {
         console.log("获取到 openid:", openid);
         return openid;
     } catch (err) {
-        console.error("获取 openid 失败:", err);
         return null;
     }
 }

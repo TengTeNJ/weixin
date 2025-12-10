@@ -38,10 +38,8 @@ Page({
       const _this = this;
       const id = e.currentTarget.dataset.id;
       const plan = this.data.list.find(p => p.confId === id);
-      console.error('id=',id)
       if (!plan) return;
       let _result = await recharge.prepayForRecharge(plan.confId,plan.rechargeMoney)
-      console.error('_result=',_result)
       wx.requestPayment({
         ..._result.data,
         success(res) {
@@ -51,7 +49,6 @@ Page({
             wx.navigateBack();
         },
         fail(error) {
-            console.error('error',error)
         }
     })
       //this.pay(plan.amount, plan.bonus);
@@ -78,7 +75,6 @@ Page({
             eventChannel.emit('refreshPage');
         },
         fail(error) {
-            console.error('error',error)
         }
     })
       // this.pay(amount, 0);

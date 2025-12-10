@@ -253,3 +253,12 @@
     color: white;
   }
   
+  .version-entry {
+    width: 100%;
+    text-align: center;
+    background-color: #f0f0f0; /* 灰色背景 */
+    color: #666666;
+    padding: 20rpx 0;
+    font-size: 28rpx;
+    box-sizing: border-box;
+  }

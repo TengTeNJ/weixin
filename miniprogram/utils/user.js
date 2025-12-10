@@ -18,7 +18,6 @@ function saveUserInfo(userInfo = {}) {
         wx.setStorageSync(USER_KEY, userInfo);
         getApp().globalData.userInfo = userInfo;
     } catch (e) {
-        console.error('保存用户信息失败:', e);
     }
 }
 

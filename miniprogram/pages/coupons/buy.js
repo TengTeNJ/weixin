@@ -36,7 +36,6 @@ Page({
         const _this = this;
         if (!this.data.configObj) return;
         let _result = await recharge.prepayForRecharge(this.data.configObj.confId,this.data.configObj.rechargeMoney)
-        console.error('_result=',_result)
         wx.requestPayment({
           ..._result.data,
           success(res) {
@@ -46,7 +45,6 @@ Page({
               wx.navigateBack();
           },
           fail(error) {
-              console.error('error',error)
               const eventChannel = _this.getOpenerEventChannel();
               eventChannel.emit('refreshPage');
               wx.navigateBack()

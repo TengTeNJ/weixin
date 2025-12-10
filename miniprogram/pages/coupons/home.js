@@ -65,7 +65,6 @@ Page({
     // 获取类型列表
     async getConfigList() {
         let _data = await recharge.getList(1);
-        console.error('_data=', _data);
         // 对返回的数组做处理
         let list = _data.data.map(item => {
             // 根据返回数据计算颜色或其他属性
@@ -159,7 +158,6 @@ Page({
     // 充值
     async selectPlan(e) {
         const id = e.currentTarget.dataset.id;
-        console.error('e.currentTarget.dataset',e.currentTarget.dataset)
         if(e.currentTarget.dataset.item.isTerm){
             // 体验券
             let content = '请到店联系前台进行核销'
@@ -174,7 +172,6 @@ Page({
             return;
         }
         const plan = this.data.filteredCards.find(p => p.confId === id);
-        console.error('id=', id)
         wx.navigateTo({
             url: `/pages/coupons/buy?data=${encodeURIComponent(JSON.stringify(plan))}`,
             complete() {}

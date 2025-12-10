@@ -7,7 +7,8 @@ Page({
             nickName: '',
             phoneNumber: '',
             balance: 100.00,
-            memberId: 0
+            memberId: 0,
+            version: ''
         },
         balance: 0.0,
         featureList: [{
@@ -92,6 +93,10 @@ Page({
         this.setData({
             userInfo: userInfo,
         })
+        const app = getApp();
+        this.setData({
+          version: app.globalData.version || '未知版本'
+        });
     },
 
     onShow() {
@@ -158,7 +163,6 @@ Page({
         const token = result.data.memberToken;
         userUtils.saveToken(token);
         this.getAccountData();
-
     },
 
     async onClickGrid(e) {
@@ -234,6 +238,19 @@ Page({
             index
         } = e.currentTarget.dataset // 获取传递的数据
         if (index != 0) {
+            // wx.openCustomerServiceChat({
+            //     corpId: '你的企业微信真实 corpId', // 企业微信后台的企业 ID
+            //     extInfo: {
+            //         url: 'https://potenttennis.com' // 任意有效 https 链接即可
+            //       },
+            //     success(res) {
+            //       console.log('打开客服成功', res);
+            //     },
+            //     fail(err) {
+            //       console.error('打开客服失败', err);
+            //     }
+            //   });
+            //   return;
             wx.makePhoneCall({
                 phoneNumber: '18094391931'
             })

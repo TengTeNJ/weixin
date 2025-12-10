@@ -17,7 +17,7 @@ App({
         })
         // 将检查登录方法挂载到全局
         this.globalData.checkLogin = checkLogin;
-        
+
         const updateManager = wx.getUpdateManager()
         updateManager.onCheckForUpdate(function (res) {
           console.log('hasUpdate:', res.hasUpdate)
@@ -41,7 +41,8 @@ App({
         token: '',
         checkLogin: null,
         storeId: null,
-        store: {}
+        store: {},
+        version: '12.10' // 直接写在这里
     },
     // 简易事件总线
     eventBus: {

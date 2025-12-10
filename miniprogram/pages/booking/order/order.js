@@ -31,7 +31,6 @@ Page({
                 placedOrders: datas
             })
         } else {
-            console.error('orderStatus',res.data)
             this.setData({
                 cancelledOrders: datas
             })
@@ -55,7 +54,6 @@ Page({
     // 取消预约事件
     handleCancel(e) {
         const orderId = e.currentTarget.dataset.orderid;
-        console.error('prderId', orderId)
         var _this = this;
         wx.showModal({
             cancelText: '否',

@@ -22,12 +22,10 @@ export default {
             const res = await http.get('/api/login/getWxOpenId', {
                 code
             });
-            console.error('123=', res)
             // 存储openId
             set(STORAGE_KEYS.OPENID, res.data.openId)
             return res;
         } catch (err) {
-            console.error('获取 IP 失败:', err);
             // 可选：继续请求或者返回错误
             return await http.get('/api/login/getWxOpenId', {
                 code

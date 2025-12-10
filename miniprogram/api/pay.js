@@ -54,7 +54,6 @@ export default {
             });
 
         } catch (err) {
-            console.error('获取 IP 失败:', err);
             // 可选：继续请求或者返回错误
             return http.post('/api/pay/prepay', {
                 priceIdList: priceIdList,
