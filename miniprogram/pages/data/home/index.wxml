@@ -1,0 +1,120 @@
+<!-- 顶部筛选 -->
+<view class="filter-bar">
+    <view class="filter-label">数据类型</view>
+    <view class="filter-divider"></view>
+    <view class="filter-tabs">
+        <block wx:for="{{ranges}}" wx:key="key">
+            <view class="tab {{item.key === activeRange ? 'active' : ''}}" data-key="{{item.key}}" bindtap="onRangeTap">
+                {{item.label}}
+            </view>
+            <view wx:if="{{index < ranges.length - 1}}" class="tab-divider"></view>
+        </block>
+    </view>
+</view>
+<view class="page">
+    <!-- 四个统计卡片 -->
+    <view class="card-grid">
+        <view class="stat-card">
+            <view class="stat-header">
+                <text class="stat-title">击球数</text>
+                <image src="/images/data/count.png" mode="heightFix"></image>
+            </view>
+            <view class="stat-value-row">
+                <text class="stat-value">960</text>
+                <text class="stat-unit">个</text>
+            </view>
+            <view class="stat-extra">超过96.6%</view>
+            <view class="progress-bar">
+                <view class="progress-inner progress-green" style="width: 96%;"></view>
+            </view>
+        </view>
+
+        <view class="stat-card">
+            <view class="stat-header">
+                <text class="stat-title">训练时长</text>
+                <image src="/images/bottom/data.png" mode="heightFix"></image>
+            </view>
+            <view class="stat-value-row">
+                <text class="stat-value">5.6</text>
+                <text class="stat-unit">h</text>
+            </view>
+            <view class="stat-extra">超过96.6%</view>
+            <view class="progress-bar">
+                <view class="progress-inner progress-green" style="width: 96%;"></view>
+            </view>
+        </view>
+
+        <view class="stat-card">
+            <view class="stat-header">
+                <text class="stat-title">卡路里消耗</text>
+                <image src="/images/data/cal.png" mode="heightFix"></image>
+            </view>
+            <view class="stat-value-row">
+                <text class="stat-value">2500</text>
+                <text class="stat-unit">kcal</text>
+            </view>
+            <view class="stat-extra">超过25.8%</view>
+            <view class="progress-bar">
+                <view class="progress-inner progress-blue" style="width: 26%;"></view>
+            </view>
+        </view>
+
+        <view class="stat-card">
+            <view class="stat-header">
+                <text class="stat-title">平均球速</text>
+                <image src="/images/data/avg.png" mode="widthFix"></image>
+            </view>
+            <view class="stat-value-row">
+                <text class="stat-value">90</text>
+                <text class="stat-unit">km/h</text>
+            </view>
+            <view class="stat-extra">超过50.3%</view>
+            <view class="progress-bar">
+                <view class="progress-inner progress-orange" style="width: 50%;"></view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 三个小指标 -->
+    <view class="mini-metric-row">
+        <view class="mini-metric">
+            <text class="mini-label">最高球速</text>
+            <text class="mini-value">105km/h</text>
+        </view>
+        <view class="mini-metric">
+            <text class="mini-label">连续击中</text>
+            <text class="mini-value">10次</text>
+        </view>
+        <view class="mini-metric">
+            <text class="mini-label">大于5拍</text>
+            <text class="mini-value">10次</text>
+        </view>
+    </view>
+
+    <!-- 训练分布 + 环形图 -->
+    <view class="train-section">
+        <view class="train-header">
+            <text class="train-title">训练分布</text>
+            <view class="legend">
+                <view class="legend-item">
+                    <view class="dot dot-blue"></view>
+                    <text class="legend-text">标靶</text>
+                </view>
+                <view class="legend-item">
+                    <view class="dot dot-orange"></view>
+                    <text class="legend-text">AR场</text>
+                </view>
+                <view class="legend-item">
+                    <view class="dot dot-green"></view>
+                    <text class="legend-text">测试</text>
+                </view>
+            </view>
+        </view>
+
+        <view class="train-chart-wrapper">
+            <view class="echart-page">
+                <ec-canvas id="ring" canvas-id="ring" ec="{{ ec }}"></ec-canvas>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,324 @@
+/* 数据页布局样式，尽量还原设计稿 */
+
+.page {
+    min-height: 100vh;
+    background-color: #f5f5f7;
+    padding: 16rpx 24rpx 32rpx;
+    box-sizing: border-box;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24rpx;
+    background-color: white;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
+}
+
+.filter-label {
+    font-size: 26rpx;
+    color: #666;
+    margin-right: 0;
+}
+
+.filter-divider,
+.tab-divider {
+    width: 2rpx;
+    height: 28rpx;
+    background-color: #e5e5e5;
+    margin: 0 16rpx;
+}
+
+.filter-tabs {
+    display: flex;
+    align-items: center;
+}
+
+.tab {
+    padding: 8rpx 20rpx;
+    font-size: 24rpx;
+    color: #888;
+    border-radius: 28rpx;
+}
+
+.tab.active {
+    background-color: #ffefe5;
+    color: #ff7a3c;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 16rpx;
+    grid-row-gap: 16rpx;
+    margin-bottom: 16rpx;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    border-radius: 16rpx;
+    padding: 20rpx;
+    box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.02);
+    box-sizing: border-box;
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12rpx;
+}
+
+.stat-title {
+    font-size: 24rpx;
+    color: #333;
+}
+
+.stat-tag {
+    font-size: 22rpx;
+}
+
+.stat-tag.hot {
+    font-size: 24rpx;
+}
+
+.stat-value-row {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 8rpx;
+}
+
+.stat-value {
+    font-weight: 500;
+    font-size: 20px;
+    color: #181818;
+}
+
+.stat-unit {
+    font-weight: 500;
+    font-size: 10px;
+    color: #181818;
+    margin-left: 4rpx;
+    margin-bottom: 4rpx;
+}
+
+.stat-extra {
+    font-weight: 500;
+    font-size: 10px;
+    color: #7B7B7B;
+    margin-bottom: 8rpx;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6rpx;
+    border-radius: 6rpx;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.progress-inner {
+    height: 100%;
+    border-radius: 6rpx;
+}
+
+.progress-green {
+    background-color: #41c689;
+}
+
+.progress-blue {
+    background-color: #4b8fff;
+}
+
+.progress-orange {
+    background-color: #ff9f3a;
+}
+
+.mini-metric-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 16rpx 0 24rpx;
+}
+
+.mini-metric {
+    flex: 1;
+    margin-right: 16rpx;
+    background-color: #ffffff;
+    border-radius: 16rpx;
+    padding: 16rpx 0;
+    text-align: center;
+}
+
+.mini-metric:last-child {
+    margin-right: 0;
+}
+
+.mini-label {
+    display: block;
+    font-weight: 500;
+    font-size: 13px;
+    color: #181818;
+    margin-bottom: 6rpx;
+}
+
+.mini-value {
+    font-weight: 500;
+    font-size: 13px;
+    color: #E96415;
+}
+
+.train-section {
+    background-color: #ffffff;
+    border-radius: 16rpx;
+    padding: 20rpx 20rpx 80rpx;
+}
+
+.train-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 104rpx;
+}
+
+.train-title {
+    font-weight: 500;
+    font-size: 13px;
+    color: #181818;
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-left: 16rpx;
+}
+
+.dot {
+    width: 14rpx;
+    height: 14rpx;
+    border-radius: 50%;
+    margin-right: 6rpx;
+}
+
+.dot-blue {
+    background-color: #4b8fff;
+}
+
+.dot-orange {
+    background-color: #ff9f3a;
+}
+
+.dot-green {
+    background-color: #41c689;
+}
+
+.legend-text {
+    font-weight: 500;
+    font-size: 24rpx;
+    color: #181818;
+}
+
+.train-chart-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8rpx;
+}
+
+.donut-wrapper {
+    position: relative;
+    width: 260rpx;
+    height: 260rpx;
+    margin: 0 auto;
+}
+
+.donut {
+    width: 260rpx;
+    height: 260rpx;
+    border-radius: 50%;
+    background: conic-gradient(#4b8fff 0 200deg, #ff9f3a 200deg 260deg, #41c689 260deg 360deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donut-inner {
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.donut-value {
+    font-size: 24rpx;
+    color: #333;
+}
+
+.label-group {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transform: translateY(-50%);
+    /* 以锚点为起点，线向外伸 */
+}
+
+.dir-right {
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.dir-left {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.label-line {
+    width: 90rpx;
+    height: 0;
+    border-top: 2rpx solid #d9d9d9;
+}
+
+.label-text {
+    margin-left: 8rpx;
+    margin-right: 8rpx;
+    display: flex;
+    flex-direction: column;
+}
+
+.label-percent {
+    font-size: 22rpx;
+    color: #333;
+}
+
+.label-name {
+    font-size: 20rpx;
+    color: #888;
+    margin-top: 2rpx;
+}
+
+.echart-page {
+    width: 100%;
+    height: 340rpx;
+    /* 必须给具体高度 */
+    background: #fff;
+}
+
+ec-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+image {
+    margin-left: 12rpx;
+    width: 28rpx;
+    height: 28rpx;
+}

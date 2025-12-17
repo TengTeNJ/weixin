@@ -14,7 +14,8 @@
     "pages/coupons/home",
     "pages/me/video/video",
     "pages/coupons/buy",
-    "pages/common/empty"
+    "pages/common/empty",
+    "pages/data/home/index"
   ],
   "window": {
     "navigationBarTitleText": "Potent",
@@ -32,6 +33,12 @@
         "text": "首页",
         "iconPath": "images/bottom/home-no.png",
         "selectedIconPath": "images/bottom/home.png"
+      },
+      {
+        "pagePath": "pages/data/home/index",
+        "text": "数据",
+        "iconPath": "images/bottom/data.png",
+        "selectedIconPath": "images/bottom/data.png"
       },
       {
         "pagePath": "pages/me/index",
