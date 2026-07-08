@@ -35,12 +35,6 @@
         "selectedIconPath": "images/bottom/home.png"
       },
       {
-        "pagePath": "pages/data/home/index",
-        "text": "数据",
-        "iconPath": "images/bottom/data.png",
-        "selectedIconPath": "images/bottom/data.png"
-      },
-      {
         "pagePath": "pages/me/index",
         "text": "我的",
         "iconPath": "images/bottom/mine-no.png",

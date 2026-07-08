@@ -3,6 +3,22 @@ const {
 } = require('./utils/user');
 
 import userUtils from './utils/user'
+(function () {
+    const originPage = Page;
+    Page = function (pageConfig) {
+      // 如果页面没定义 onShareAppMessage，就给一个默认的
+      if (!pageConfig.onShareAppMessage) {
+        pageConfig.onShareAppMessage = function (res) {
+          return {
+            title: "Potent智能网球训练馆", // 默认分享标题
+            path: "/" + this.route, // 当前页面路径
+            imageUrl: './images/home/icon.png' // 可选：默认分享图
+          };
+        };
+      }
+      originPage(pageConfig);
+    };
+})();
 // app.js
 App({
     onLaunch() {
@@ -42,7 +58,7 @@ App({
         checkLogin: null,
         storeId: null,
         store: {},
-        version: '12.10' // 直接写在这里
+        version: '26.04.28' // 直接写在这里
     },
     // 简易事件总线
     eventBus: {

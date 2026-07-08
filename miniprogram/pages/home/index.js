@@ -21,6 +21,14 @@ Page({
         venue: {},
     },
 
+       // 分享配置
+  onShareAppMessage() {
+    return {
+      title: 'Potent智能网球训练馆', // 默认分享标题（可选）
+      path: '/pages/index/index', // 默认当前页面路径（可选）
+      imageUrl: '/images/home/icon.png', // 自定义分享图片（可选）
+    };
+  },
     // 初始化函数
     async onLoad() {
         const userInfo = userUtils.getUserInfo();
